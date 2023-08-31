@@ -10,8 +10,8 @@ const page = () => {
     setAddItems([...addItems, {}]);
   };
   return (
-    <main className="flex w-full px-5 py-5 mt-5 drop-shadow-xl bg-gray-200">
-      <div className=" flex flex-1 mt-6 p-4 ">
+    <main className="flex w-full p-5 mt-5 drop-shadow-xl bg-gray-200 relative">
+      <div className=" flex flex-1 mt-6 p-6 relative">
         <form className="flex flex-1 flex-col space-y-2">
           <div className="flex gap-3 items-center mb-6">
             <div className="flex-1 flex gap-3 items-center">
@@ -36,7 +36,7 @@ const page = () => {
               </select>
             </div>
           </div>
-          <div className="grid grid-cols-5 gap-5 ">
+          <div className="grid grid-cols-6 gap-5 ">
             <h2 className="col-span-5 font-semibold text-lg">First:</h2>
             <div className="col-span-2">
               <input
@@ -57,6 +57,15 @@ const page = () => {
                 <option value="">Team1</option>
               </select>
             </div>
+            <div className="col-span-1 relative">
+              <select className="w-full p-2 border border-gray-300 rounded">
+              <option value="">Grade</option>
+                <option value="">A</option>
+                <option value="">B</option>
+                <option value="">C</option>
+                <option value="">D</option>
+              </select>
+            </div>
             <div className="col-span-1">
               <input
                 type="text"
@@ -68,46 +77,7 @@ const page = () => {
 
           {/* ------------------------------ */}
 
-          <div className="grid grid-cols-5 pt-3 gap-5">
-            <h2 className="col-span-5 font-semibold text-lg">Second:</h2>
-            
-            <div className="col-span-2">
-              <input
-                type="text"
-                className="w-full border border-gray-300 p-2 rounded"
-                placeholder="Enter name"
-              />
-            </div>
-
-            <div className="col-span-2">
-              <select
-                name=""
-                id=""
-                className="w-full p-2 rounded border border-gray-300"
-              >
-                <option value="">Team1</option>
-                <option value="">Team1</option>
-                <option value="">Team1</option>
-              </select>
-            </div>
-            {/* <div className="">
-              <select>
-                <option value="">A</option>
-                <option value="">B</option>
-                <option value="">C</option>
-                <option value="">D</option>
-              </select>
-            </div> */}
-            <div className="col-span-1">
-              <input
-                type="text"
-                className=" border border-gray-300 p-2 rounded"
-                placeholder="Enter mark"
-              />
-            </div>
-          </div>
-
-          <div className="grid grid-cols-5 pt-3 gap-5">
+          <div className="grid grid-cols-6 pt-3 gap-5">
             <h2 className="col-span-5 font-semibold text-lg">Third:</h2>
             <div className="col-span-2">
               <input
@@ -128,6 +98,54 @@ const page = () => {
                 <option value="">Team1</option>
               </select>
             </div>
+            <div className="col-span-1 relative">
+              <select className="w-full p-2 border border-gray-300 rounded">
+              <option value="">Grade</option>
+                <option value="">A</option>
+                <option value="">B</option>
+                <option value="">C</option>
+                <option value="">D</option>
+              </select>
+            </div>
+            <div className="col-span-1">
+              <input
+                type="text"
+                className="w-full border border-gray-300 p-2 rounded"
+                placeholder="Enter name"
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-6 pt-3 gap-5">
+            <h2 className="col-span-5 font-semibold text-lg">Third:</h2>
+            <div className="col-span-2">
+              <input
+                type="text"
+                className="w-full border border-gray-300 p-2 rounded"
+                placeholder="Enter name"
+              />
+            </div>
+
+            <div className="col-span-2">
+              <select
+                name=""
+                id=""
+                className="w-full p-2 rounded border border-gray-300"
+              >
+                <option value="">Team1</option>
+                <option value="">Team1</option>
+                <option value="">Team1</option>
+              </select>
+            </div>
+            <div className="col-span-1 relative">
+              <select className="w-full p-2 border border-gray-300 rounded">
+              <option value="">Grade</option>
+                <option value="">A</option>
+                <option value="">B</option>
+                <option value="">C</option>
+                <option value="">D</option>
+              </select>
+            </div>
             <div className="col-span-1">
               <input
                 type="text"
@@ -139,7 +157,7 @@ const page = () => {
           {addItems.map(() => (
             <>
               <h1 className="pt-3 font-semibold ">Another grades:</h1>
-              <div className="grid grid-cols-5 pt-6 gap-5">
+              <div className="grid grid-cols-6 pt-6 gap-5">
                 <div className="col-span-2">
                   <input
                     type="text"
@@ -157,6 +175,15 @@ const page = () => {
                     <option value="">Team1</option>
                     <option value="">Team1</option>
                     <option value="">Team1</option>
+                  </select>
+                </div>
+                <div className="col-span-1 relative">
+                  <select className="w-full p-2 border border-gray-300 rounded">
+                    <option value="">Grade</option>
+                    <option value="">A</option>
+                    <option value="">B</option>
+                    <option value="">C</option>
+                    <option value="">D</option>
                   </select>
                 </div>
                 <div className="col-span-1">
