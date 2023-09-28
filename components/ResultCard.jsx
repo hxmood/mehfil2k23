@@ -1,40 +1,140 @@
-import React from 'react'
+import React from "react";
 
-const ResultCard = () => {
-return (
+const ResultCard = ({ post }) => {
+  console.log(post);
+  const firstletter = (str) => {
+    const getfirst = str
+      .split(" ")
+      .map((word) => word.charAt(0))
+      .join(".");
+    return getfirst;
+  };
 
-    <div className='flex w-full flex-col bg-white shadow-md rounded-lg p-3'>
-        <div className="flex w-full justify-between">
-        <h1 className='font-semibold text-lg'>Elocution english</h1>
-        <h2 className=''>junior</h2>
-        
+  return (
+    <div className="flex flex-col bg-white shadow-md rounded-lg p-3 capitalize">
+      <div className="flex w-full justify-between">
+        <h1 className="font-semibold text-lg">{post.res}</h1>
+        <h2 className="">{post.category}</h2>
+      </div>
+      <hr className="mt-2 " />
+
+      {/*--------------------------  */}
+
+      <div className="flex flex-col">
+        <div className="flex mt-2 flex-col px-2 items-center">
+          <div className="flex w-full">
+            <div className="flex basis-1/2">
+              <h1 className="mr-2">1</h1>
+              <h1>{post.first.name}</h1>
+            </div>
+
+            <div className="flex basis-1/2 ">
+              <div className="grid w-full grid-cols-3 place-items-end">
+                <h2>{post.first.grade}</h2>
+                <h2>{post.first.marks}</h2>
+                <p className="text-gray-500">{firstletter(post.first.team)}</p>
+              </div>
+            </div>
+          </div>
+          {post.anotherFirst && (
+            <div className="flex w-full">
+              <div className="flex basis-1/2">
+                {post.anotherFirst.afName && <h1 className="mr-2">1</h1>}
+
+                <h1>{post.anotherFirst.afName}</h1>
+              </div>
+              <div className="flex basis-1/2 ">
+                <div className="grid w-full grid-cols-3 place-items-end">
+                  <h2>{post.anotherFirst.afGrade}</h2>
+                  <h2>{post.anotherFirst.afMarks}</h2>
+                  <p className="text-gray-500">
+                    {firstletter(post.anotherFirst.afTeam)}
+                  </p>
+                </div>
+                <hr />
+              </div>
+            </div>
+          )}
         </div>
-        <hr className='mt-2 '/>
-        <div className="flex flex-col mt-2 w-full space-y-2">
-            <div className='flex flex-1 justify-between px-2'>
-                <h2 className='font-bold'>1 <span className='font-normal'>Muhammad</span></h2>
-                
-                <h2 className='text-gray-600'>A</h2>
-                <h2 className='text-gray'>10</h2>
-            </div>
-            
-            <div className='flex flex-1 justify-between px-2'>
-                <h2 className='font-bold'>2 <span className='font-normal'>Muhammad</span></h2>
-                
-                <h2 className='text-gray-600'>A</h2>
-                <h2 className='text-gray'>10</h2>
+
+        <div className="flex mt-2 flex-col px-2 items-center">
+          <div className="flex w-full">
+            <div className="flex basis-1/2">
+              <h1 className="mr-2">2</h1>
+              <h1>{post.second.secName}</h1>
             </div>
 
-            <div className='flex flex-1 justify-between px-2'>
-                <h2 className='font-bold'>3 <span className='font-normal'>Muhammad</span></h2>
-                
-                <h2 className='text-gray-600'>A</h2>
-                <h2 className='text-gray'>10</h2>
+            <div className="flex basis-1/2 ">
+              <div className="grid w-full grid-cols-3 place-items-end">
+                <h2>{post.second.secGrade}</h2>
+                <h2>{post.second.secMarks}</h2>
+                <p className="text-gray-500">
+                  {firstletter(post.second.secTeam)}
+                </p>
+              </div>
             </div>
+          </div>
+
+          {post.anotherSecond && (
+            <div className="flex w-full">
+              <div className="flex basis-1/2">
+                {post.anotherSecond.asName && <h1 className="mr-2">2</h1>}
+                <h1>{post.anotherSecond.asName}</h1>
+              </div>
+              <div className="flex basis-1/2 ">
+                <div className="grid w-full grid-cols-3 place-items-end">
+                  <h2>{post.anotherSecond.asGrade}</h2>
+                  <h2>{post.anotherSecond.asMarks}</h2>
+                  <p className="text-gray-500">
+                    {firstletter(post.anotherSecond.asTeam)}
+                  </p>
+                </div>
+                <hr />
+              </div>
+            </div>
+          )}
         </div>
-        
+
+        <div className="flex mt-2 flex-col px-2 items-center">
+          <div className="flex w-full">
+            <div className="flex basis-1/2">
+              <h1 className="mr-2">3</h1>
+              <h1>{post.third.thrName}</h1>
+            </div>
+
+            <div className="flex basis-1/2 ">
+              <div className="grid w-full grid-cols-3 place-items-end">
+                <h2>{post.third.thrGrade}</h2>
+                <h2>{post.third.thrMarks}</h2>
+                <p className="text-gray-500">
+                  {firstletter(post.third.thrTeam)}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {post.anotherThird && (
+            <div className="flex w-full">
+              <div className="flex basis-1/2">
+                {post.anotherThird.atName && <h1 className="mr-2">3</h1>}
+                <h1>{post.anotherThird.atName}</h1>
+              </div>
+              <div className="flex basis-1/2 ">
+                <div className="grid w-full grid-cols-3 place-items-end">
+                  <h2>{post.anotherThird.atGrade}</h2>
+                  <h2>{post.anotherThird.atMarks}</h2>
+                  <p className="text-gray-500">
+                    {firstletter(post.anotherThird.atTeam)}
+                  </p>
+                </div>
+                <hr />
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
-)
-}
+  );
+};
 
-export default ResultCard
+export default ResultCard;

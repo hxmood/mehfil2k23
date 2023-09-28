@@ -1,112 +1,222 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import ResultShow from "@/components/ResultShow";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
 
-const page = () => {
-  // const [dropdown, setDropdown] = useState(false)
-  const [addItems, setAddItems] = useState([]);
+export const page = () => {
+  const router = useRouter();
+  const [resultItem, setResultItem] = useState({
+    item: "",
+    category: "",
+  });
+
+  const [firstResult, setFirstResult] = useState({
+    name: "",
+    team: "",
+    grade: "",
+    marks: "",
+  });
+
+  const [secondResult, setSecondResult] = useState({
+    secName: "",
+    secTeam: "",
+    secGrade: "",
+    secMarks: "",
+  });
+
+  const [thirdResult, setThirdResult] = useState({
+    thrName: "",
+    thrTeam: "",
+    thrGrade: "",
+    thrMarks: "",
+  });
+
+
   const [anotherFirst, setAnotherFirst] = useState([]);
+  const [anotherFirstResult, setAnotherFirstResult] = useState(
+    {
+      afName: "",
+      afTeam: "",
+      afGrade: "",
+      afMarks: "",
+    },
+  );
+
+
+
   const [anotherSecond, setAnotherSecond] = useState([]);
+  const [anotherSecondResult, setAnotherSecondResult] = useState({
+    asName: '',
+    asTeam: '',
+    asGrade: '',
+    asMarks: ''
+  })
+
   const [anotherThird, setAnotherThird] = useState([]);
+  const [anotherThirdResult, setAnotherThirdResult] = useState({
+    atName: '',
+    atTeam: '',
+    atGrade: '',
+    atMarks: ''
+  })
+
+  const [addItems, setAddItems] = useState([]);
+
   const handleAddItem = (e) => {
     e.preventDefault();
     setAddItems([...addItems, {}]);
   };
 
+  console.log(anotherFirstResult);
   const handleAnotherFirst = (e) => {
     e.preventDefault();
     setAnotherFirst([...anotherFirst, {}]);
   };
-
   const handleAnotherSecond = () => {
-    setAnotherSecond([...anotherSecond, {}])
-  }
-
+    setAnotherSecond([...anotherSecond, {}]);
+  };
   const handleAnotherThird = () => {
-    setAnotherThird([...anotherThird, {}])
-
-  }
+    setAnotherThird([...anotherThird, {}]);
+  };
 
   const deleteItem = () => {};
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("/api/resUpload/new", {
+        method: "POST",
+        body: JSON.stringify({
+          res: resultItem.item,
+          category: resultItem.category,
+          name: firstResult.name,
+          team: firstResult.team,
+          grade: firstResult.grade,
+          marks: firstResult.marks,
+          secName: secondResult.secName,
+          secTeam: secondResult.secTeam,
+          secGrade: secondResult.secGrade,
+          secMarks: secondResult.secMarks,
+          thrName: thirdResult.thrName,
+          thrTeam: thirdResult.thrTeam,
+          thrGrade: thirdResult.thrGrade,
+          thrMarks: thirdResult.thrMarks,
+          afName: anotherFirstResult.afName,
+          afTeam: anotherFirstResult.afTeam,
+          afGrade: anotherFirstResult.afGrade,
+          afMarks: anotherFirstResult.afMarks,
+          asName: anotherSecondResult.asName,
+          asTeam: anotherSecondResult.asTeam,
+          asGrade: anotherSecondResult.asGrade,
+          asMarks: anotherSecondResult.asMarks,
+          atName: anotherThirdResult.atName,
+          atTeam: anotherThirdResult.atTeam,
+          atGrade: anotherThirdResult.atGrade,
+          atMarks: anotherThirdResult.atMarks
+        }),
+      });
+    
+        setResultItem({
+          item: '',
+          category: ''
+        });
+        setFirstResult({
+          name: '',
+          team: '',
+          grade: '',
+          marks: ''
+        });
+        setSecondResult({
+          secName: '',
+          secTeam: '',
+          secGrade: '',
+          secMarks: ''
+        });
+        setThirdResult({
+          thrName: '',
+          thrTeam: '',
+          thrGrade: '',
+          thrMarks: ''
+        });
+
+        setAnotherFirstResult({
+          afName: '',
+          afTeam: '',
+          afGrade: '',
+          afMarks: ''
+        });
+
+        setAnotherSecondResult({
+          asName: '',
+          asTeam: '',
+          asGrade: '',
+          asMarks: ''
+        });
+
+        setAnotherThirdResult({
+          atName: '',
+          atTeam: '',
+          atGrade: '',
+          atMarks: ''
+        })
+      }
+      
+       catch (error) {
+        console.log(error);
+    }
+  };
+
   return (
-    <main className="flex w-full p-5 shadow-xl bg-gray-200 relative">
-      <div className=" flex flex-1 mt-6 p-6 relative">
-        <form className="flex flex-1 flex-col space-y-2">
-          <div className="flex gap-3 items-center mb-6">
-            <div className="flex-1 flex gap-3 items-center">
-              <label>result:</label>
-              <input
-                type="text"
-                className="p-2 border border-gray-300 rounded"
-              />
-            </div>
+    <>
+      <main className="flex flex-col w-full p-5 shadow-xl bg-gray-200 relative">
+        <div className=" flex flex-1 mt-6 p-6 relative">
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-1 flex-col space-y-2"
+          >
+            <div className="flex gap-3 items-center mb-6">
+              <div className="flex-1 flex gap-3 items-center">
+                <label>result:</label>
+                <input
+                  required
+                  value={resultItem.item}
+                  onChange={(e) =>
+                    setResultItem({ ...resultItem, item: e.target.value })
+                  }
+                  type="text"
+                  className="p-2 border border-gray-300 rounded"
+                />
+              </div>
 
-            <div className="flex-1 flex justify-end items-center gap-3">
-              <label htmlFor="">Category:</label>
-              <select
-                name=""
-                id=""
-                className="p-2 border border-gray-400 rounded"
-              >
-                <option value="">B zone</option>
-                <option value="">C zone</option>
-                <option value="">Y zone</option>
-                <option value="">H zone</option>
-                <option value="">General</option>
-              </select>
+              <div className="flex-1 flex justify-end items-center gap-3">
+                <label>Category:</label>
+                <select
+                  required
+                  value={resultItem.category}
+                  onChange={(e) =>
+                    setResultItem({ ...resultItem, category: e.target.value })
+                  }
+                  className="p-2 border border-gray-400 rounded"
+                >
+                  <option>Zone</option>
+                  <option value="B zone">B zone</option>
+                  <option value="C zone">C zone</option>
+                  <option value="Y zone">Y zone</option>
+                  <option value="H zone">H zone</option>
+                  <option value="General">General</option>
+                </select>
+              </div>
             </div>
-          </div>
-          <div className="grid grid-cols-6 gap-5 ">
-            <h2 className="col-span-5 font-semibold text-lg">First:</h2>
-            <div className="col-span-2">
-              <input
-                type="text"
-                className="w-full border border-gray-300 p-2 rounded"
-                placeholder="Enter name"
-              />
-            </div>
-
-            <div className="col-span-2">
-              <select
-                name=""
-                id=""
-                className="w-full p-2 rounded border border-gray-300"
-              >
-                <option value="">Traditional Trackers</option>
-                <option value="">Legacy Legends</option>
-                <option value="">Historic Heros</option>
-              </select>
-            </div>
-            <div className="col-span-1 relative">
-              <select className="w-full p-2 border border-gray-300 rounded">
-                <option value="">Grade</option>
-                <option value="">A</option>
-                <option value="">B</option>
-                <option value="">C</option>
-                <option value="">D</option>
-              </select>
-            </div>
-            <div className="col-span-1 flex items-center">
-              <input
-                type="text"
-                className="w-full border border-gray-300 p-2 rounded"
-                placeholder="Enter mark"
-              />
-              <h1
-                className="ml-4 cursor-pointer text-green-700 font-extrabold text-lg"
-                onClick={handleAnotherFirst}
-              >
-                +
-              </h1>
-            </div>
-          </div>
-
-          {anotherFirst.map(() => (
             <div className="grid grid-cols-6 gap-5 ">
               <h2 className="col-span-5 font-semibold text-lg">First:</h2>
               <div className="col-span-2">
                 <input
+                  required
+                  value={firstResult.name}
+                  onChange={(e) =>
+                    setFirstResult({ ...firstResult, name: e.target.value })
+                  }
                   type="text"
                   className="w-full border border-gray-300 p-2 rounded"
                   placeholder="Enter name"
@@ -115,291 +225,439 @@ const page = () => {
 
               <div className="col-span-2">
                 <select
-                  name=""
-                  id=""
+                  required
+                  value={firstResult.team}
+                  onChange={(e) =>
+                    setFirstResult({ ...firstResult, team: e.target.value })
+                  }
                   className="w-full p-2 rounded border border-gray-300"
                 >
-                  <option value="">Traditional Trackers</option>
-                <option value="">Legacy Legends</option>
-                <option value="">Historic Heros</option>
+                  <option>Select team</option>
+                  <option value="Traditional Trackers">Traditional Trackers</option>
+                  <option value="Legacy Legends">Legacy Legends</option>
+                  <option value="Ancient Alliance">Ancient Alliance</option>
+                  <option value="-">-</option>
                 </select>
               </div>
               <div className="col-span-1 relative">
-                <select className="w-full p-2 border border-gray-300 rounded">
-                  <option value="">Grade</option>
-                  <option value="">A</option>
-                  <option value="">B</option>
-                  <option value="">C</option>
-                  <option value="">D</option>
+                <select
+                  required
+                  value={firstResult.grade}
+                  onChange={(e) =>
+                    setFirstResult({ ...firstResult, grade: e.target.value })
+                  }
+                  className="w-full p-2 border border-gray-300 rounded"
+                >
+                  <option>Grade</option>
+                  <option value="A+">A+</option>
+                  <option value="A">A</option>
+                  <option value="B">B</option>
+                  <option value="C">C</option>
+                  <option value="D">D</option>
+                  <option value="-">-</option>
                 </select>
               </div>
               <div className="col-span-1 flex items-center">
                 <input
-                  type="text"
+                  required
+                  value={firstResult.marks}
+                  onChange={(e) =>
+                    setFirstResult({ ...firstResult, marks: e.target.value })
+                  }
+                  type="number"
                   className="w-full border border-gray-300 p-2 rounded"
                   placeholder="Enter mark"
                 />
                 <h1
-                  className="ml-4 text-red-700 cursor-pointer font-extrabold text-lg"
-                  onClick={deleteItem}
+                  className="ml-4 cursor-pointer text-green-700 font-extrabold text-lg"
+                  onClick={handleAnotherFirst}
                 >
-                  x
+                  +
                 </h1>
               </div>
             </div>
-          ))}
+            {/* ------------------------------------------- */}
 
-          {/* ------------------------------ */}
-
-          <div className="grid grid-cols-6 pt-3 gap-5">
-            <h2 className="col-span-5 font-semibold text-lg">Second:</h2>
-            <div className="col-span-2">
-              <input
-                type="text"
-                className="w-full border border-gray-300 p-2 rounded"
-                placeholder="Enter name"
-              />
-            </div>
-
-            <div className="col-span-2">
-              <select
-                name=""
-                id=""
-                className="w-full p-2 rounded border border-gray-300"
-              >
-                <option value="">Traditional Trackers</option>
-                <option value="">Legacy Legends</option>
-                <option value="">Historic Heros</option>
-              </select>
-            </div>
-            <div className="col-span-1 relative">
-              <select className="w-full p-2 border border-gray-300 rounded">
-                <option value="">Grade</option>
-                <option value="">A</option>
-                <option value="">B</option>
-                <option value="">C</option>
-                <option value="">D</option>
-              </select>
-            </div>
-            <div className="col-span-1 flex items-center">
-              <input
-                type="text"
-                className="w-full border border-gray-300 p-2 rounded"
-                placeholder="Enter name"
-              />
-
-              <h1
-                className="ml-4 cursor-pointer text-green-700 font-extrabold text-lg"
-                onClick={handleAnotherSecond}
-              >
-                +
-              </h1>
-            </div>
-          </div>
-
-          {anotherSecond.map(() => (
-            <div className="grid grid-cols-6 pt-3 gap-5">
-            <h2 className="col-span-5 font-semibold text-lg">Second:</h2>
-            <div className="col-span-2">
-              <input
-                type="text"
-                className="w-full border border-gray-300 p-2 rounded"
-                placeholder="Enter name"
-              />
-            </div>
-
-            <div className="col-span-2">
-              <select
-                name=""
-                id=""
-                className="w-full p-2 rounded border border-gray-300"
-              >
-                <option value="">Traditional Trackers</option>
-                <option value="">Legacy Legends</option>
-                <option value="">Historic Heros</option>
-              </select>
-            </div>
-            <div className="col-span-1 relative">
-              <select className="w-full p-2 border border-gray-300 rounded">
-                <option value="">Grade</option>
-                <option value="">A</option>
-                <option value="">B</option>
-                <option value="">C</option>
-                <option value="">D</option>
-              </select>
-            </div>
-            <div className="col-span-1 flex items-center">
-              <input
-                type="text"
-                className="w-full border border-gray-300 p-2 rounded"
-                placeholder="Enter name"
-              />
-
-              <h1
-                className="ml-4 cursor-pointer text-red-700 font-extrabold text-lg"
-                onClick={deleteItem}
-              >
-                x
-              </h1>
-            </div>
-          </div>
-          ))}
-
-          <div className="grid grid-cols-6 pt-3 gap-5">
-            <h2 className="col-span-5 font-semibold text-lg">Third:</h2>
-            <div className="col-span-2">
-              <input
-                type="text"
-                className="w-full border border-gray-300 p-2 rounded"
-                placeholder="Enter name"
-              />
-            </div>
-
-            <div className="col-span-2">
-              <select
-                name=""
-                id=""
-                className="w-full p-2 rounded border border-gray-300"
-              >
-                <option value="">Traditional Trackers</option>
-                <option value="">Legacy Legends</option>
-                <option value="">Historic Heros</option>
-              </select>
-            </div>
-            <div className="col-span-1 relative">
-              <select className="w-full p-2 border border-gray-300 rounded">
-                <option value="">Grade</option>
-                <option value="">A</option>
-                <option value="">B</option>
-                <option value="">C</option>
-                <option value="">D</option>
-              </select>
-            </div>
-            <div className="col-span-1 flex items-center">
-              <input
-                type="text"
-                className="w-full border border-gray-300 p-2 rounded"
-                placeholder="Enter name"
-              />
-              <h1
-                className="ml-4 cursor-pointer text-green-700 font-extrabold text-lg"
-                onClick={handleAnotherThird}
-              >
-                +
-              </h1>
-            </div>
-          </div>
-
-          {anotherThird.map(() => (
-            <div className="grid grid-cols-6 pt-3 gap-5">
-            <h2 className="col-span-5 font-semibold text-lg">Third:</h2>
-            <div className="col-span-2">
-              <input
-                type="text"
-                className="w-full border border-gray-300 p-2 rounded"
-                placeholder="Enter name"
-              />
-            </div>
-
-            <div className="col-span-2">
-              <select
-                name=""
-                id=""
-                className="w-full p-2 rounded border border-gray-300"
-              >
-                <option value="">Traditional Trackers</option>
-                <option value="">Legacy Legends</option>
-                <option value="">Historic Heros</option>
-              </select>
-            </div>
-            <div className="col-span-1 relative">
-              <select className="w-full p-2 border border-gray-300 rounded">
-                <option value="">Grade</option>
-                <option value="">A</option>
-                <option value="">B</option>
-                <option value="">C</option>
-                <option value="">D</option>
-              </select>
-            </div>
-            <div className="col-span-1 flex items-center">
-              <input
-                type="text"
-                className="w-full border border-gray-300 p-2 rounded"
-                placeholder="Enter name"
-              />
-              <h1
-                className="ml-4 cursor-pointer text-red-700 font-extrabold text-lg"
-                onClick={deleteItem}
-              >
-                x
-              </h1>
-            </div>
-          </div>
-          ))}
-
-          {/* ---------------------------- */}
-
-
-          {addItems.map(() => (
-            <>
-              <h1 className="pt-3 font-semibold ">Another grades:</h1>
-              <div className="grid grid-cols-6 pt-6 gap-5">
+            {anotherFirst.map(() => (
+              <div className="grid grid-cols-6 gap-5 ">
+                <h2 className="col-span-5 font-semibold text-lg">
+                  Another First:
+                </h2>
                 <div className="col-span-2">
                   <input
                     type="text"
+                    value={anotherFirstResult.afName}
+                    onChange={(e) => setAnotherFirstResult({...anotherFirstResult, afName: e.target.value})}
                     className="w-full border border-gray-300 p-2 rounded"
-                    placeholder="Enter name"
+                    placeholder="Enter Name"
                   />
                 </div>
 
                 <div className="col-span-2">
-                  <select
-                    name=""
-                    id=""
-                    className="w-full p-2 rounded border border-gray-300"
+                  <select className="w-full p-2 rounded border border-gray-300"
+                    value={anotherFirstResult.afTeam}
+                    onChange={e => setAnotherFirstResult({...anotherFirstResult, afTeam: e.target.value})}>
+
+                    <option>Select Team</option>
+                    <option value="Traditional Trackers">Traditional Trackers</option>
+                    <option value="Legacy Legends">Legacy Legends</option>
+                    <option value="Ancient Alliance">Ancient Alliance</option>
+                    <option value="-">-</option>
+
+                  </select>
+                </div>
+
+                <div className="col-span-1 relative">
+                  <select className="w-full p-2 border border-gray-300 rounded"
+                    value={anotherFirstResult.afGrade}
+                    onChange={e => setAnotherFirstResult({...anotherFirstResult, afGrade: e.target.value})}>
+
+                    <option>Grade</option>
+                    <option value="A+">A+</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                    <option value="-">-</option>
+                  </select>
+                </div>
+
+                <div className="col-span-1 flex items-center">
+                  <input
+                    value={anotherFirstResult.afMarks}
+                    onChange={e => setAnotherFirstResult({...anotherFirstResult, afMarks: e.target.value})}
+                    type="number"
+                    className="w-full border border-gray-300 p-2 rounded"
+                    placeholder="Enter mark"
+                  />
+                  <h1
+                    className="ml-4 text-red-700 cursor-pointer font-extrabold text-lg"
+                    onClick={deleteItem}
                   >
-                    <option value="">Traditional Trackers</option>
-                <option value="">Legacy Legends</option>
-                <option value="">Historic Heros</option>
+                    x
+                  </h1>
+                </div>
+              </div>
+            ))}
+
+            {/* ------------------------------ */}
+
+            <div className="grid grid-cols-6 pt-3 gap-5">
+              <h2 className="col-span-5 font-semibold text-lg">Second:</h2>
+              <div className="col-span-2">
+                <input
+                  required
+                  value={secondResult.secName}
+                  onChange={(e) =>
+                    setSecondResult({ ...secondResult, secName: e.target.value })
+                  }
+                  type="text"
+                  className="w-full border border-gray-300 p-2 rounded"
+                  placeholder="Enter Name"
+                />
+              </div>
+
+              <div className="col-span-2">
+                <select
+                  required
+                  value={secondResult.secTeam}
+                  onChange={(e) =>
+                    setSecondResult({ ...secondResult, secTeam: e.target.value })
+                  }
+                  className="w-full p-2 rounded border border-gray-300"
+                >
+                  <option>Select team</option>
+                  <option value="Traditional Trackers">Traditional Trackers</option>
+                  <option value="Legacy Legends">Legacy Legends</option>
+                  <option value="Ancient Alliance">Ancient Alliance</option>
+                  <option value="-">-</option>
+                </select>
+              </div>
+              <div className="col-span-1 relative">
+                <select
+                  required
+                  value={secondResult.secGrade}
+                  onChange={(e) =>
+                    setSecondResult({ ...secondResult, secGrade: e.target.value })
+                  }
+                  className="w-full p-2 border border-gray-300 rounded"
+                >
+                  <option>Grade</option>
+                  <option value="A+">A+</option>
+                  <option value="A">A</option>
+                  <option value="B">B</option>
+                  <option value="C">C</option>
+                  <option value="D">D</option>
+                  <option value="-">-</option>
+                </select>
+              </div>
+              <div className="col-span-1 flex items-center">
+                <input
+                  required
+                  value={secondResult.secMarks}
+                  onChange={(e) =>
+                    setSecondResult({ ...secondResult, secMarks: e.target.value })
+                  }
+                  type="number"
+                  className="w-full border border-gray-300 p-2 rounded"
+                  placeholder="Enter mark"
+                />
+
+                <h1
+                  className="ml-4 cursor-pointer text-green-700 font-extrabold text-lg"
+                  onClick={handleAnotherSecond}
+                >
+                  +
+                </h1>
+              </div>
+            </div>
+
+            {anotherSecond.map(() => (
+              <div className="grid grid-cols-6 pt-3 gap-5">
+                <h2 className="col-span-5 font-semibold text-lg">Another Second:</h2>
+                <div className="col-span-2">
+                  <input
+                    type="text"
+                    value={anotherSecondResult.asName}
+                    onChange={e => setAnotherSecondResult({...anotherSecondResult, asName: e.target.value})}
+                    className="w-full border border-gray-300 p-2 rounded"
+                    placeholder="Enter Name"
+                  />
+                </div>
+
+                <div className="col-span-2">
+                  <select className="w-full p-2 rounded border border-gray-300"
+                    value={anotherSecondResult.asTeam}
+                    onChange={e => setAnotherSecondResult({...anotherSecondResult, asTeam: e.target.value})}>
+                    <option>Select Team</option>
+                    <option value="Traditional Trackers">Traditional Trackers</option>
+                    <option value="Legacy Legends">Legacy Legends</option>
+                    <option value="Ancient Alliance">Ancient Alliance</option>
+                    <option value="-">-</option>
                   </select>
                 </div>
                 <div className="col-span-1 relative">
-                  <select className="w-full p-2 border border-gray-300 rounded">
-                    <option value="">Grade</option>
-                    <option value="">A</option>
-                    <option value="">B</option>
-                    <option value="">C</option>
-                    <option value="">D</option>
+                  <select className="w-full p-2 border border-gray-300 rounded"
+                  value={anotherSecondResult.asGrade}
+                  onChange={e => setAnotherSecondResult({...anotherSecondResult, asGrade: e.target.value})}>
+                    <option>Grade</option>
+                    <option value="A+">A+</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                    <option value="-">-</option>
                   </select>
                 </div>
-                <div className="col-span-1">
+                <div className="col-span-1 flex items-center">
                   <input
-                    type="text"
+                    value={anotherSecondResult.asMarks}
+                    onChange={e => setAnotherSecondResult({...anotherSecondResult, asMarks: e.target.value})}
+                    type="number"
                     className="w-full border border-gray-300 p-2 rounded"
-                    placeholder="Enter name"
+                    placeholder="Enter Marks"
                   />
+
+                  <h1
+                    className="ml-4 cursor-pointer text-red-700 font-extrabold text-lg"
+                    onClick={deleteItem}
+                  >
+                    x
+                  </h1>
                 </div>
               </div>
-            </>
-          ))}
+            ))}
 
-          <div className="">
-            <button
-              className="px-4 py-1 bg-green-900 text-white"
-              onClick={handleAddItem}
-            >
-              <span className="font-bold text-lg">+</span>Add item
-            </button>
-          </div>
-          <div className="flex justify-end pt-6">
-            <button className="px-4 py-3  rounded bg-[#2372fa] font-semibold text-lg text-white">
-              Submit
-            </button>
-          </div>
-        </form>
-      </div>
-      <form></form>
-    </main>
+            <div className="grid grid-cols-6 pt-3 gap-5">
+              <h2 className="col-span-5 font-semibold text-lg">Third:</h2>
+              <div className="col-span-2">
+                <input
+                  required
+                  value={thirdResult.thrName}
+                  onChange={(e) =>
+                    setThirdResult({ ...thirdResult, thrName: e.target.value })
+                  }
+                  type="text"
+                  className="w-full border border-gray-300 p-2 rounded"
+                  placeholder="Enter Name"
+                />
+              </div>
+
+              <div className="col-span-2">
+                <select
+                  required
+                  value={thirdResult.thrTeam}
+                  onChange={(e) =>
+                    setThirdResult({ ...thirdResult, thrTeam: e.target.value })
+                  }
+                  className="w-full p-2 rounded border border-gray-300"
+                >
+                  <option>Select team</option>
+                  <option value="Traditional Trackers">Traditional Trackers</option>
+                  <option value="Legacy Legends">Legacy Legends</option>
+                  <option value="Ancient Alliance">Ancient Alliance</option>
+                  <option value="-">-</option>
+                </select>
+              </div>
+              <div className="col-span-1 relative">
+                <select
+                  required
+                  value={thirdResult.thrGrade}
+                  onChange={(e) =>
+                    setThirdResult({ ...thirdResult, thrGrade: e.target.value })
+                  }
+                  className="w-full p-2 border border-gray-300 rounded"
+                >
+                  <option>Grade</option>
+                  <option value="A+">A+</option>
+                  <option value="A">A</option>
+                  <option value="B">B</option>
+                  <option value="C">C</option>
+                  <option value="D">D</option>
+                  <option value="-">-</option>
+                </select>
+              </div>
+              <div className="col-span-1 flex items-center">
+                <input
+                  required
+                  value={thirdResult.thrMarks}
+                  onChange={(e) =>
+                    setThirdResult({ ...thirdResult, thrMarks: e.target.value })
+                  }
+                  type="number"
+                  className="w-full border border-gray-300 p-2 rounded"
+                  placeholder="Enter Mark"
+                />
+                <h1
+                  className="ml-4 cursor-pointer text-green-700 font-extrabold text-lg"
+                  onClick={handleAnotherThird}
+                >
+                  +
+                </h1>
+              </div>
+            </div>
+
+            {anotherThird.map(() => (
+              <div className="grid grid-cols-6 pt-3 gap-5">
+                <h2 className="col-span-5 font-semibold text-lg">Another Third:</h2>
+                <div className="col-span-2">
+                  <input
+                    value={anotherThirdResult.atName}
+                    onChange={e => setAnotherThirdResult({...anotherThirdResult, atName: e.target.value})}
+                    type="text"
+                    className="w-full border border-gray-300 p-2 rounded"
+                    placeholder="Enter Name"
+                  />
+                </div>
+
+                <div className="col-span-2">
+                  <select className="w-full p-2 rounded border border-gray-300"
+                    value={anotherThirdResult.atTeam}
+                    onChange={e => setAnotherThirdResult({...anotherThirdResult, atTeam: e.target.value})}>
+                    <option>Select Team</option>
+                    <option value="Traditional Trackers">Traditional Trackers</option>
+                    <option value="Legacy Legends">Legacy Legends</option>
+                    <option value="Ancient Alliance">Ancient Alliance</option>
+                    <option value="-">-</option>
+                  </select>
+                </div>
+                
+                <div className="col-span-1 relative">
+                  <select className="w-full p-2 border border-gray-300 rounded"
+                    value={anotherThirdResult.atGrade}
+                    onChange={e => setAnotherThirdResult({...anotherThirdResult, atGrade: e.target.value})}>
+                    <option>Grade</option>
+                    <option value="A+">A+</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                    <option value="-">-</option>
+                  </select>
+                </div>
+
+                <div className="col-span-1 flex items-center">
+                  <input
+                    value={anotherThirdResult.atMarks}
+                    onChange={e => setAnotherThirdResult({...anotherThirdResult, atMarks: e.target.value})}
+                    type="number"
+                    className="w-full border border-gray-300 p-2 rounded"
+                    placeholder="Enter Marks"
+                  />
+                  <h1
+                    className="ml-4 cursor-pointer text-red-700 font-extrabold text-lg"
+                    onClick={deleteItem}
+                  >
+                    x
+                  </h1>
+                </div>
+              </div>
+            ))}
+
+            {/* ---------------------------- */}
+
+            {addItems.map(() => (
+              <>
+                <h1 className="pt-3 font-semibold ">Another grades:</h1>
+                <div className="grid grid-cols-6 pt-6 gap-5">
+                  <div className="col-span-2">
+                    <input
+                      type="text"
+                      className="w-full border border-gray-300 p-2 rounded"
+                      placeholder="Enter name"
+                    />
+                  </div>
+
+                  <div className="col-span-2">
+                    <select className="w-full p-2 rounded border border-gray-300">
+                      <option value="Traditional Trackers">
+                        Traditional Trackers
+                      </option>
+                      <option value="Legacy Legends">Legacy Legends</option>
+                      <option value="Ancient Alliance">Ancient Alliance</option>
+                    </select>
+                  </div>
+                  <div className="col-span-1 relative">
+                    <select className="w-full p-2 border border-gray-300 rounded">
+                      <option>Grade</option>
+                      <option value="A">A</option>
+                      <option value="B">B</option>
+                      <option value="C">C</option>
+                      <option value="D">D</option>
+                    </select>
+                  </div>
+                  <div className="col-span-1">
+                    <input
+                      type="text"
+                      className="w-full border border-gray-300 p-2 rounded"
+                      placeholder="Enter name"
+                    />
+                  </div>
+                </div>
+              </>
+            ))}
+
+            <div className="">
+              <button
+                type="button"
+                className="px-4 py-1 bg-green-900 text-white"
+                onClick={handleAddItem}
+              >
+                <span className="font-bold text-lg">+</span>Add item
+              </button>
+            </div>
+            <div className="flex justify-end pt-6">
+              <button
+                type="submit"
+                className="px-4 py-3  rounded bg-[#2372fa] font-semibold text-lg text-white"
+              >
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
+      </main>
+    </>
   );
 };
 

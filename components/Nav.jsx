@@ -13,9 +13,9 @@ const Nav = () => {
 
       <div className="sm:flex hidden">
         <div className="flex gap-3 md:gap-5">
-          <Link href="/">Results</Link>
-          <Link href="/">Media</Link>
-          <Link href="/">Posters</Link>
+          <Link href="/results">Results</Link>
+          <Link href="/media">Media</Link>
+          <Link href="/posters">Posters</Link>
         </div>
       </div>
 

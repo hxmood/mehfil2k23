@@ -1,16 +1,58 @@
+"use client"
+
 import ResultCard from '@/components/ResultCard'
 import React from 'react'
+import { useState, useEffect } from 'react'
+
+const ResultcardLists = ({datas}) => {
+  return(
+    <div className='flex flex-col-reverse w-full gap-y-3'>
+      {datas.map((post)=> (
+        <ResultCard post={post}/>
+      ))}
+    </div>
+   
+  )
+
+}
 
 const page = () => {
+const [results, setResults] = useState([])
+
+useEffect(() => {
+  const fetchRes = async() => {
+    const response = await fetch("/api/results")
+    const datas = await response.json()
+    setResults(datas)
+    console.log(datas);
+  } 
+  fetchRes()
+}, [])
+
+  const [category, setCategory] = useState('')
+  console.log(category)
+  const filteredItems = category ? results.filter(zone => zone.category == category) : results
+
+
+
   return (
-    <div className='w-full flex flex-col space-y-4 items-center justify-center'>
-      <h1 className='font-extrabold text-xl text-green-700'>Results</h1>
-      <ResultCard/>
-      <ResultCard/>
-      <ResultCard/>
-      <ResultCard/>
-      <ResultCard/>
-      <ResultCard/>
+    <div className='w-full flex flex-col  items-center justify-center'>
+      <div className='flex w-full justify-between mb-4 items-center'>
+      <h1 className='font-extrabold text-2xl text-blue-700'>Results</h1>
+      <select value={category} className='border shadow-md rounded-md p-2' onChange={e => setCategory(e.target.value)}>
+        <option value="">All</option>
+        <option value='B zone'>B zone</option>
+        <option value='C zone'>C zone</option>
+        <option value='Y zone'>Y zone</option>
+        <option value='H zone'>H zone</option>
+        <option value='General'>General</option>
+
+      </select>
+      </div>
+      
+      
+      
+      <ResultcardLists datas={filteredItems}/>
     </div>
   )
 }
