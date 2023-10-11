@@ -1,10 +1,6 @@
 "use client";
-
-import ResultShow from "@/components/ResultShow";
-import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { names } from "@/names/page";
-import { Combobox } from "@headlessui/react";
 
 export const page = () => {
   const allNames = [].concat(...Object.values(names));
