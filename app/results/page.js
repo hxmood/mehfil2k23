@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react'
 
 const ResultcardLists = ({datas}) => {
   return(
-    <div className='flex flex-col-reverse w-full gap-y-3'>
+    <div className='flex flex-col-reverse w-full gap-y-3 mb-4 px-6'>
       {datas.map((post)=> (
         <ResultCard post={post}/>
       ))}
@@ -19,15 +19,15 @@ const ResultcardLists = ({datas}) => {
 const page = () => {
 const [results, setResults] = useState([])
 
-useEffect(() => {
-  const fetchRes = async() => {
-    const response = await fetch("/api/results")
-    const datas = await response.json()
-    setResults(datas)
-    console.log(datas);
-  } 
-  fetchRes()
-}, [])
+// useEffect(() => {
+//   const fetchRes = async() => {
+//     const response = await fetch("/api/results")
+//     const datas = await response.json()
+//     setResults(datas)
+//     console.log(datas);
+//   } 
+//   fetchRes()
+// }, [])
 
   const [category, setCategory] = useState('')
   console.log(category)
@@ -37,7 +37,7 @@ useEffect(() => {
 
   return (
     <div className='w-full flex flex-col  items-center justify-center'>
-      <div className='flex w-full justify-between mb-4 items-center'>
+      <div className='flex w-full px-6 justify-between mb-4 items-center'>
       <h1 className='font-extrabold text-2xl text-blue-700'>Results</h1>
       <select value={category} className='border shadow-md rounded-md p-2' onChange={e => setCategory(e.target.value)}>
         <option value="">All</option>
@@ -51,8 +51,8 @@ useEffect(() => {
       </div>
       
       
+      {results.length !== 0 ? <ResultcardLists datas={filteredItems}/> : <h1 className='text-md mt-6'>Results not published yet</h1>}
       
-      <ResultcardLists datas={filteredItems}/>
     </div>
   )
 }

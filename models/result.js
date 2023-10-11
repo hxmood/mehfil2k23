@@ -43,7 +43,14 @@ const resultTypes = new Schema({
         atTeam: String,
         atGrade: String,
         atMarks: Number
-    }
+    },
+
+    anotherGrades :[{
+        addName: String,
+        addTeam: String,
+        addGrade : String,
+        addMarks: Number
+    }]
 
 
 },

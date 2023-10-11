@@ -13,9 +13,8 @@ const Nav = () => {
 
       <div className="sm:flex hidden">
         <div className="flex gap-3 md:gap-5">
-          <Link href="/results">Results</Link>
-          <Link href="/media">Media</Link>
-          <Link href="/posters">Posters</Link>
+          <Link href="/results" className="font-semibold" >Results</Link>
+          <Link href="/points" className="font-semibold" >Points</Link>
         </div>
       </div>
 
@@ -25,9 +24,8 @@ const Nav = () => {
         <Image src="/icons/menu.svg" width={30} height={30} alt="hee" className="cursor-pointer" onClick={() => setDropMenu((prev) => !prev)}/>
         {dropMenu && (
           <div className="absolute right-0 top-full w-full p-5 rounded-lg bg-white shadow-lg min-w-[210px] flex flex-col gap-2 justify-end items-end dropdown">
-            <Link href="/results" onClick={() => setDropMenu(!dropMenu)}>Results</Link>
-            <Link href="/posters" onClick={() => setDropMenu(!dropMenu)}>Posters</Link>
-            <Link href="/media" onClick={() => setDropMenu(!dropMenu)}>Media</Link>
+            <Link href="/results" className="font-semibold" onClick={() => setDropMenu(!dropMenu)}>Results</Link>
+            <Link href="/points" className="font-semibold"  onClick={() => setDropMenu(!dropMenu)}>Points</Link>
           </div>
         )}
       </div>

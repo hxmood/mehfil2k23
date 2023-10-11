@@ -3,13 +3,17 @@
 import ResultShow from "@/components/ResultShow";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import { names } from "@/names/page";
+import { Combobox } from "@headlessui/react";
 
 export const page = () => {
-  const router = useRouter();
+  const allNames = [].concat(...Object.values(names));
+
   const [resultItem, setResultItem] = useState({
     item: "",
     category: "",
   });
+  const categorized = names[resultItem.category] || [];
 
   const [firstResult, setFirstResult] = useState({
     name: "",
@@ -17,6 +21,7 @@ export const page = () => {
     grade: "",
     marks: "",
   });
+  console.log(firstResult.name);
 
   const [secondResult, setSecondResult] = useState({
     secName: "",
@@ -32,43 +37,47 @@ export const page = () => {
     thrMarks: "",
   });
 
-
   const [anotherFirst, setAnotherFirst] = useState([]);
-  const [anotherFirstResult, setAnotherFirstResult] = useState(
-    {
-      afName: "",
-      afTeam: "",
-      afGrade: "",
-      afMarks: "",
-    },
-  );
-
-
+  const [anotherFirstResult, setAnotherFirstResult] = useState({
+    afName: "",
+    afTeam: "",
+    afGrade: "",
+    afMarks: "",
+  });
 
   const [anotherSecond, setAnotherSecond] = useState([]);
   const [anotherSecondResult, setAnotherSecondResult] = useState({
-    asName: '',
-    asTeam: '',
-    asGrade: '',
-    asMarks: ''
-  })
+    asName: "",
+    asTeam: "",
+    asGrade: "",
+    asMarks: "",
+  });
 
   const [anotherThird, setAnotherThird] = useState([]);
   const [anotherThirdResult, setAnotherThirdResult] = useState({
-    atName: '',
-    atTeam: '',
-    atGrade: '',
-    atMarks: ''
-  })
+    atName: "",
+    atTeam: "",
+    atGrade: "",
+    atMarks: "",
+  });
 
   const [addItems, setAddItems] = useState([]);
 
   const handleAddItem = (e) => {
     e.preventDefault();
-    setAddItems([...addItems, {}]);
+    setAddItems([
+      ...addItems,
+      { addName: "", addTeam: "", addGrade: "", addMarks: "" },
+    ]);
   };
 
-  console.log(anotherFirstResult);
+  const handleChange = (index, e) => {
+    const { name, value } = e.target;
+    const updatedFormData = [...addItems];
+    updatedFormData[index][name] = value;
+    setAddItems(updatedFormData);
+  };
+
   const handleAnotherFirst = (e) => {
     e.preventDefault();
     setAnotherFirst([...anotherFirst, {}]);
@@ -113,57 +122,59 @@ export const page = () => {
           atName: anotherThirdResult.atName,
           atTeam: anotherThirdResult.atTeam,
           atGrade: anotherThirdResult.atGrade,
-          atMarks: anotherThirdResult.atMarks
+          atMarks: anotherThirdResult.atMarks,
+          anotherGrades: addItems,
         }),
       });
-    
-        setResultItem({
-          item: '',
-          category: ''
-        });
-        setFirstResult({
-          name: '',
-          team: '',
-          grade: '',
-          marks: ''
-        });
-        setSecondResult({
-          secName: '',
-          secTeam: '',
-          secGrade: '',
-          secMarks: ''
-        });
-        setThirdResult({
-          thrName: '',
-          thrTeam: '',
-          thrGrade: '',
-          thrMarks: ''
-        });
 
-        setAnotherFirstResult({
-          afName: '',
-          afTeam: '',
-          afGrade: '',
-          afMarks: ''
-        });
+      alert("results posted successfully");
+      setResultItem({
+        item: "",
+        category: "",
+      });
+      setFirstResult({
+        name: "",
+        team: "",
+        grade: "",
+        marks: "",
+      });
+      setSecondResult({
+        secName: "",
+        secTeam: "",
+        secGrade: "",
+        secMarks: "",
+      });
+      setThirdResult({
+        thrName: "",
+        thrTeam: "",
+        thrGrade: "",
+        thrMarks: "",
+      });
 
-        setAnotherSecondResult({
-          asName: '',
-          asTeam: '',
-          asGrade: '',
-          asMarks: ''
-        });
+      setAnotherFirstResult({
+        afName: "",
+        afTeam: "",
+        afGrade: "",
+        afMarks: "",
+      });
 
-        setAnotherThirdResult({
-          atName: '',
-          atTeam: '',
-          atGrade: '',
-          atMarks: ''
-        })
-      }
-      
-       catch (error) {
-        console.log(error);
+      setAnotherSecondResult({
+        asName: "",
+        asTeam: "",
+        asGrade: "",
+        asMarks: "",
+      });
+
+      setAnotherThirdResult({
+        atName: "",
+        atTeam: "",
+        atGrade: "",
+        atMarks: "",
+      });
+
+      setAddItems([]);
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -208,19 +219,28 @@ export const page = () => {
                 </select>
               </div>
             </div>
+
+            {/* --------------------------------------------------------- */}
+
             <div className="grid grid-cols-6 gap-5 ">
               <h2 className="col-span-5 font-semibold text-lg">First:</h2>
               <div className="col-span-2">
-                <input
-                  required
+                <select
+                  className="w-full border border-gray-300 p-2 rounded"
                   value={firstResult.name}
                   onChange={(e) =>
                     setFirstResult({ ...firstResult, name: e.target.value })
                   }
-                  type="text"
-                  className="w-full border border-gray-300 p-2 rounded"
-                  placeholder="Enter name"
-                />
+                >
+                  <option>Select Name</option>
+                  {categorized.length !== 0
+                    ? categorized.map((item) => (
+                        <option value={item}>{item}</option>
+                      ))
+                    : allNames.map((item) => (
+                        <option value={item}>{item}</option>
+                      ))}
+                </select>
               </div>
 
               <div className="col-span-2">
@@ -233,7 +253,9 @@ export const page = () => {
                   className="w-full p-2 rounded border border-gray-300"
                 >
                   <option>Select team</option>
-                  <option value="Traditional Trackers">Traditional Trackers</option>
+                  <option value="Traditional Trackers">
+                    Traditional Trackers
+                  </option>
                   <option value="Legacy Legends">Legacy Legends</option>
                   <option value="Ancient Alliance">Ancient Alliance</option>
                   <option value="-">-</option>
@@ -284,34 +306,59 @@ export const page = () => {
                   Another First:
                 </h2>
                 <div className="col-span-2">
-                  <input
-                    type="text"
-                    value={anotherFirstResult.afName}
-                    onChange={(e) => setAnotherFirstResult({...anotherFirstResult, afName: e.target.value})}
+                  <select
                     className="w-full border border-gray-300 p-2 rounded"
-                    placeholder="Enter Name"
-                  />
+                    value={anotherFirstResult.afMarks}
+                    onChange={(e) =>
+                      setAnotherFirstResult({
+                        ...anotherFirst,
+                        afName: e.target.value,
+                      })
+                    }
+                  >
+                    <option>Select Name</option>
+                    {categorized.length !== 0
+                      ? categorized.map((item) => (
+                          <option value={item}>{item}</option>
+                        ))
+                      : allNames.map((item) => (
+                          <option value={item}>{item}</option>
+                        ))}
+                  </select>
                 </div>
 
                 <div className="col-span-2">
-                  <select className="w-full p-2 rounded border border-gray-300"
+                  <select
+                    className="w-full p-2 rounded border border-gray-300"
                     value={anotherFirstResult.afTeam}
-                    onChange={e => setAnotherFirstResult({...anotherFirstResult, afTeam: e.target.value})}>
-
+                    onChange={(e) =>
+                      setAnotherFirstResult({
+                        ...anotherFirstResult,
+                        afTeam: e.target.value,
+                      })
+                    }
+                  >
                     <option>Select Team</option>
-                    <option value="Traditional Trackers">Traditional Trackers</option>
+                    <option value="Traditional Trackers">
+                      Traditional Trackers
+                    </option>
                     <option value="Legacy Legends">Legacy Legends</option>
                     <option value="Ancient Alliance">Ancient Alliance</option>
                     <option value="-">-</option>
-
                   </select>
                 </div>
 
                 <div className="col-span-1 relative">
-                  <select className="w-full p-2 border border-gray-300 rounded"
+                  <select
+                    className="w-full p-2 border border-gray-300 rounded"
                     value={anotherFirstResult.afGrade}
-                    onChange={e => setAnotherFirstResult({...anotherFirstResult, afGrade: e.target.value})}>
-
+                    onChange={(e) =>
+                      setAnotherFirstResult({
+                        ...anotherFirstResult,
+                        afGrade: e.target.value,
+                      })
+                    }
+                  >
                     <option>Grade</option>
                     <option value="A+">A+</option>
                     <option value="A">A</option>
@@ -325,7 +372,12 @@ export const page = () => {
                 <div className="col-span-1 flex items-center">
                   <input
                     value={anotherFirstResult.afMarks}
-                    onChange={e => setAnotherFirstResult({...anotherFirstResult, afMarks: e.target.value})}
+                    onChange={(e) =>
+                      setAnotherFirstResult({
+                        ...anotherFirstResult,
+                        afMarks: e.target.value,
+                      })
+                    }
                     type="number"
                     className="w-full border border-gray-300 p-2 rounded"
                     placeholder="Enter mark"
@@ -345,16 +397,25 @@ export const page = () => {
             <div className="grid grid-cols-6 pt-3 gap-5">
               <h2 className="col-span-5 font-semibold text-lg">Second:</h2>
               <div className="col-span-2">
-                <input
-                  required
+                <select
+                  className="w-full border border-gray-300 p-2 rounded"
                   value={secondResult.secName}
                   onChange={(e) =>
-                    setSecondResult({ ...secondResult, secName: e.target.value })
+                    setSecondResult({
+                      ...secondResult,
+                      secName: e.target.value,
+                    })
                   }
-                  type="text"
-                  className="w-full border border-gray-300 p-2 rounded"
-                  placeholder="Enter Name"
-                />
+                >
+                  <option>Select Name</option>
+                  {categorized.length !== 0
+                    ? categorized.map((item) => (
+                        <option value={item}>{item}</option>
+                      ))
+                    : allNames.map((item) => (
+                        <option value={item}>{item}</option>
+                      ))}
+                </select>
               </div>
 
               <div className="col-span-2">
@@ -362,12 +423,17 @@ export const page = () => {
                   required
                   value={secondResult.secTeam}
                   onChange={(e) =>
-                    setSecondResult({ ...secondResult, secTeam: e.target.value })
+                    setSecondResult({
+                      ...secondResult,
+                      secTeam: e.target.value,
+                    })
                   }
                   className="w-full p-2 rounded border border-gray-300"
                 >
                   <option>Select team</option>
-                  <option value="Traditional Trackers">Traditional Trackers</option>
+                  <option value="Traditional Trackers">
+                    Traditional Trackers
+                  </option>
                   <option value="Legacy Legends">Legacy Legends</option>
                   <option value="Ancient Alliance">Ancient Alliance</option>
                   <option value="-">-</option>
@@ -378,7 +444,10 @@ export const page = () => {
                   required
                   value={secondResult.secGrade}
                   onChange={(e) =>
-                    setSecondResult({ ...secondResult, secGrade: e.target.value })
+                    setSecondResult({
+                      ...secondResult,
+                      secGrade: e.target.value,
+                    })
                   }
                   className="w-full p-2 border border-gray-300 rounded"
                 >
@@ -396,7 +465,10 @@ export const page = () => {
                   required
                   value={secondResult.secMarks}
                   onChange={(e) =>
-                    setSecondResult({ ...secondResult, secMarks: e.target.value })
+                    setSecondResult({
+                      ...secondResult,
+                      secMarks: e.target.value,
+                    })
                   }
                   type="number"
                   className="w-full border border-gray-300 p-2 rounded"
@@ -412,34 +484,68 @@ export const page = () => {
               </div>
             </div>
 
+            {/* ----------------------------------------------------------- */}
+
             {anotherSecond.map(() => (
               <div className="grid grid-cols-6 pt-3 gap-5">
-                <h2 className="col-span-5 font-semibold text-lg">Another Second:</h2>
+                <h2 className="col-span-5 font-semibold text-lg">
+                  Another Second:
+                </h2>
                 <div className="col-span-2">
-                  <input
-                    type="text"
-                    value={anotherSecondResult.asName}
-                    onChange={e => setAnotherSecondResult({...anotherSecondResult, asName: e.target.value})}
+                  <select
                     className="w-full border border-gray-300 p-2 rounded"
-                    placeholder="Enter Name"
-                  />
+                    value={anotherSecondResult.asName}
+                    onChange={(e) =>
+                      setAnotherSecondResult({
+                        ...anotherSecondResult,
+                        asName: e.target.value,
+                      })
+                    }
+                  >
+                    <option>Select Name</option>
+                    {categorized.length !== 0
+                      ? categorized.map((item) => (
+                          <option value={item}>{item}</option>
+                        ))
+                      : allNames.map((item) => (
+                          <option value={item}>{item}</option>
+                        ))}
+                  </select>
                 </div>
 
+                {/* ----------------------------------------------------------- */}
+
                 <div className="col-span-2">
-                  <select className="w-full p-2 rounded border border-gray-300"
+                  <select
+                    className="w-full p-2 rounded border border-gray-300"
                     value={anotherSecondResult.asTeam}
-                    onChange={e => setAnotherSecondResult({...anotherSecondResult, asTeam: e.target.value})}>
+                    onChange={(e) =>
+                      setAnotherSecondResult({
+                        ...anotherSecondResult,
+                        asTeam: e.target.value,
+                      })
+                    }
+                  >
                     <option>Select Team</option>
-                    <option value="Traditional Trackers">Traditional Trackers</option>
+                    <option value="Traditional Trackers">
+                      Traditional Trackers
+                    </option>
                     <option value="Legacy Legends">Legacy Legends</option>
                     <option value="Ancient Alliance">Ancient Alliance</option>
                     <option value="-">-</option>
                   </select>
                 </div>
                 <div className="col-span-1 relative">
-                  <select className="w-full p-2 border border-gray-300 rounded"
-                  value={anotherSecondResult.asGrade}
-                  onChange={e => setAnotherSecondResult({...anotherSecondResult, asGrade: e.target.value})}>
+                  <select
+                    className="w-full p-2 border border-gray-300 rounded"
+                    value={anotherSecondResult.asGrade}
+                    onChange={(e) =>
+                      setAnotherSecondResult({
+                        ...anotherSecondResult,
+                        asGrade: e.target.value,
+                      })
+                    }
+                  >
                     <option>Grade</option>
                     <option value="A+">A+</option>
                     <option value="A">A</option>
@@ -452,7 +558,12 @@ export const page = () => {
                 <div className="col-span-1 flex items-center">
                   <input
                     value={anotherSecondResult.asMarks}
-                    onChange={e => setAnotherSecondResult({...anotherSecondResult, asMarks: e.target.value})}
+                    onChange={(e) =>
+                      setAnotherSecondResult({
+                        ...anotherSecondResult,
+                        asMarks: e.target.value,
+                      })
+                    }
                     type="number"
                     className="w-full border border-gray-300 p-2 rounded"
                     placeholder="Enter Marks"
@@ -468,19 +579,30 @@ export const page = () => {
               </div>
             ))}
 
+            {/* ------------------------------------------- */}
+
             <div className="grid grid-cols-6 pt-3 gap-5">
               <h2 className="col-span-5 font-semibold text-lg">Third:</h2>
               <div className="col-span-2">
-                <input
-                  required
+                <select
+                  className="w-full border border-gray-300 p-2 rounded"
                   value={thirdResult.thrName}
                   onChange={(e) =>
-                    setThirdResult({ ...thirdResult, thrName: e.target.value })
+                    setThirdResult({
+                      ...thirdResult,
+                      thrName: e.target.value,
+                    })
                   }
-                  type="text"
-                  className="w-full border border-gray-300 p-2 rounded"
-                  placeholder="Enter Name"
-                />
+                >
+                  <option>Select Name</option>
+                  {categorized.length !== 0
+                    ? categorized.map((item) => (
+                        <option value={item}>{item}</option>
+                      ))
+                    : allNames.map((item) => (
+                        <option value={item}>{item}</option>
+                      ))}
+                </select>
               </div>
 
               <div className="col-span-2">
@@ -493,7 +615,9 @@ export const page = () => {
                   className="w-full p-2 rounded border border-gray-300"
                 >
                   <option>Select team</option>
-                  <option value="Traditional Trackers">Traditional Trackers</option>
+                  <option value="Traditional Trackers">
+                    Traditional Trackers
+                  </option>
                   <option value="Legacy Legends">Legacy Legends</option>
                   <option value="Ancient Alliance">Ancient Alliance</option>
                   <option value="-">-</option>
@@ -537,35 +661,67 @@ export const page = () => {
               </div>
             </div>
 
+            {/* -------------------------------------------------------------------- */}
+
             {anotherThird.map(() => (
               <div className="grid grid-cols-6 pt-3 gap-5">
-                <h2 className="col-span-5 font-semibold text-lg">Another Third:</h2>
+                <h2 className="col-span-5 font-semibold text-lg">
+                  Another Third:
+                </h2>
                 <div className="col-span-2">
-                  <input
-                    value={anotherThirdResult.atName}
-                    onChange={e => setAnotherThirdResult({...anotherThirdResult, atName: e.target.value})}
-                    type="text"
+                  <select
                     className="w-full border border-gray-300 p-2 rounded"
-                    placeholder="Enter Name"
-                  />
+                    value={anotherThirdResult.atName}
+                    onChange={(e) =>
+                      setAnotherThirdResult({
+                        ...anotherThirdResult,
+                        atName: e.target.value,
+                      })
+                    }
+                  >
+                    <option>Select Name</option>
+                    {categorized.length !== 0
+                      ? categorized.map((item) => (
+                          <option value={item}>{item}</option>
+                        ))
+                      : allNames.map((item) => (
+                          <option value={item}>{item}</option>
+                        ))}
+                  </select>
                 </div>
 
                 <div className="col-span-2">
-                  <select className="w-full p-2 rounded border border-gray-300"
+                  <select
+                    className="w-full p-2 rounded border border-gray-300"
                     value={anotherThirdResult.atTeam}
-                    onChange={e => setAnotherThirdResult({...anotherThirdResult, atTeam: e.target.value})}>
+                    onChange={(e) =>
+                      setAnotherThirdResult({
+                        ...anotherThirdResult,
+                        atTeam: e.target.value,
+                      })
+                    }
+                  >
                     <option>Select Team</option>
-                    <option value="Traditional Trackers">Traditional Trackers</option>
+                    <option value="Traditional Trackers">
+                      Traditional Trackers
+                    </option>
                     <option value="Legacy Legends">Legacy Legends</option>
                     <option value="Ancient Alliance">Ancient Alliance</option>
                     <option value="-">-</option>
                   </select>
                 </div>
-                
+
                 <div className="col-span-1 relative">
-                  <select className="w-full p-2 border border-gray-300 rounded"
+                  <select
+                    className="w-full p-2 border border-gray-300 rounded"
                     value={anotherThirdResult.atGrade}
-                    onChange={e => setAnotherThirdResult({...anotherThirdResult, atGrade: e.target.value})}>
+                    onChange={(e) =>
+                      setAnotherThirdResult({
+                        ...anotherThirdResult,
+                        atGrade: e.target.value,
+                      })
+                    }
+                  >
                     <option>Grade</option>
                     <option value="A+">A+</option>
                     <option value="A">A</option>
@@ -579,7 +735,12 @@ export const page = () => {
                 <div className="col-span-1 flex items-center">
                   <input
                     value={anotherThirdResult.atMarks}
-                    onChange={e => setAnotherThirdResult({...anotherThirdResult, atMarks: e.target.value})}
+                    onChange={(e) =>
+                      setAnotherThirdResult({
+                        ...anotherThirdResult,
+                        atMarks: e.target.value,
+                      })
+                    }
                     type="number"
                     className="w-full border border-gray-300 p-2 rounded"
                     placeholder="Enter Marks"
@@ -596,20 +757,36 @@ export const page = () => {
 
             {/* ---------------------------- */}
 
-            {addItems.map(() => (
+            {addItems.map((data, index) => (
               <>
                 <h1 className="pt-3 font-semibold ">Another grades:</h1>
                 <div className="grid grid-cols-6 pt-6 gap-5">
                   <div className="col-span-2">
-                    <input
-                      type="text"
+                    <select
                       className="w-full border border-gray-300 p-2 rounded"
-                      placeholder="Enter name"
-                    />
+                      name="addName"
+                      value={data.addName}
+                      onChange={(e) => handleChange(index, e)}
+                    >
+                      <option>Select Name</option>
+                      {categorized.length !== 0
+                        ? categorized.map((item) => (
+                            <option value={item}>{item}</option>
+                          ))
+                        : allNames.map((item) => (
+                            <option value={item}>{item}</option>
+                          ))}
+                    </select>
                   </div>
 
                   <div className="col-span-2">
-                    <select className="w-full p-2 rounded border border-gray-300">
+                    <select
+                      className="w-full p-2 rounded border border-gray-300"
+                      name="addTeam"
+                      value={data.addTeam}
+                      onChange={(e) => handleChange(index, e)}
+                    >
+                      <option>Select Team</option>
                       <option value="Traditional Trackers">
                         Traditional Trackers
                       </option>
@@ -618,19 +795,28 @@ export const page = () => {
                     </select>
                   </div>
                   <div className="col-span-1 relative">
-                    <select className="w-full p-2 border border-gray-300 rounded">
+                    <select
+                      className="w-full p-2 border border-gray-300 rounded"
+                      name="addGrade"
+                      value={data.addGrade}
+                      onChange={(e) => handleChange(index, e)}
+                    >
                       <option>Grade</option>
                       <option value="A">A</option>
                       <option value="B">B</option>
                       <option value="C">C</option>
                       <option value="D">D</option>
+                      <option value="-">-</option>
                     </select>
                   </div>
                   <div className="col-span-1">
                     <input
-                      type="text"
+                      name="addMarks"
+                      value={data.addMarks}
+                      onChange={(e) => handleChange(index, e)}
+                      type="number"
                       className="w-full border border-gray-300 p-2 rounded"
-                      placeholder="Enter name"
+                      placeholder="Enter Mark"
                     />
                   </div>
                 </div>

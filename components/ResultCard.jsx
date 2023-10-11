@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 
 const ResultCard = ({ post }) => {
-  console.log(post);
+  const [arrays, setArrays] = useState(post.anotherGrades)
+  console.log(arrays);
   const firstletter = (str) => {
     const getfirst = str
       .split(" ")
@@ -11,7 +12,7 @@ const ResultCard = ({ post }) => {
   };
 
   return (
-    <div className="flex flex-col bg-white shadow-md rounded-lg p-3 capitalize">
+    <div className="flex flex-col bg-[#fdfdfd] shadow-md rounded-lg p-3 capitalize">
       <div className="flex w-full justify-between">
         <h1 className="font-semibold text-lg">{post.res}</h1>
         <h2 className="">{post.category}</h2>
@@ -131,6 +132,23 @@ const ResultCard = ({ post }) => {
               </div>
             </div>
           )}
+
+          {arrays && arrays.map((data, index) => (
+            <div className="flex w-full mt-2 text-gray-600" key={index}>
+              <div className="flex basis-1/2">
+                {arrays && <h1 className="mr-[4px] font-bold">--</h1>}
+                <h1 >{arrays[index].addName}</h1>
+              </div>
+
+              <div className="flex basis-1/2" key={index}>
+                <div className="grid w-full grid-cols-3 place-items-end">
+                  <h2>{arrays[index].addGrade}</h2>
+                  <h2>{arrays[index].addMarks}</h2>
+                  <p className="text-gray-500">{firstletter(post.anotherGrades[index].addTeam)}</p>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>

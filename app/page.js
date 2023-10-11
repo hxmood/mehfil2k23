@@ -2,13 +2,15 @@
 
 import React, { useEffect, useState } from "react";
 import "@/styles/global.css";
+import { Facebook, Instagram, Web, YouTube } from "@mui/icons-material";
 const page = () => {
   const [totalPoints, setTotalPoints] = useState(null);
 
   useEffect(() => {
     const fetchRes = async () => {
-      const response = await fetch("/api/teamPoints");
+      const response = await fetch("/api/getPoints");
       const datas = await response.json();
+      console.log(datas);
       setTotalPoints(datas);
     };
     fetchRes();
@@ -44,6 +46,16 @@ const page = () => {
           ))}
         </div>
       </section>
+      <footer className="w-full sm:max-w-full bg-gray-700 flex flex-col items-center justify-center">
+          <h1 className="text-white mt-6 font-semibold text-sm">Stay connected with us</h1>
+          <div className="flex items-center justify-center text-white gap-2">
+            <Instagram/>
+            <Facebook/>
+            <YouTube/>
+            <Web/>
+          </div>
+          <h1 className="text-gray-100 mt-4"><span>&copy;</span>All rights reserved</h1>
+      </footer>
     </>
   );
 };

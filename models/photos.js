@@ -8,4 +8,3 @@ const newimage = new Schema({
 
 const Photos = models.Images || model("Images", newimage)
 
-export default Photos

@@ -7,7 +7,7 @@ export const POST = async (req) => {
         thrName,thrTeam,thrGrade,thrMarks, 
         afName, afTeam, afGrade, afMarks,
         asName, asTeam, asGrade, asMarks,
-        atName, atTeam, atGrade, atMarks} = await req.json()
+        atName, atTeam, atGrade, atMarks, anotherGrades} = await req.json()
     try {
         await connectMongoDB()
         const newResult = new resultModels({
@@ -17,7 +17,8 @@ export const POST = async (req) => {
             third: {thrName,thrTeam,thrGrade,thrMarks},
             anotherFirst: {afName, afTeam, afGrade, afTeam, afMarks},
             anotherSecond: {asName, asTeam, asGrade, asMarks},
-            anotherThird: {atName, atTeam, atGrade, atMarks}
+            anotherThird: {atName, atTeam, atGrade, atMarks},
+            anotherGrades: anotherGrades
         })
 
         await newResult.save()

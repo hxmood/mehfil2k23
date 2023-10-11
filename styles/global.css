@@ -4,7 +4,7 @@
 
 
 .bg {
-  background: #cbffd3;
+  background: #f3f3f3;
   width: 100vw;
   min-height: 100vh;
   z-index: 1;
@@ -31,7 +31,7 @@
   }
   
   .main:before {
-    background: radial-gradient(circle, rgba(2, 0, 36, 0) 0, #fafafa 100%);
+    /* background: radial-gradient(circle, rgba(2, 0, 36, 0) 0, #fafafa 100%); */
     position: absolute;
     content: "";
     z-index: 2;
@@ -40,7 +40,7 @@
     top: 0;
   }
   
-  .main:after {
+  /* .main:after {
     content: "";
     background-image: url("/images/grid.svg");
     z-index: 1;
@@ -50,7 +50,7 @@
     top: 0;
     opacity: 0.4;
     filter: invert(1);
-  }
+  } */
   
   .gradient {
     height: fit-content;
@@ -74,11 +74,11 @@
     height: 100%;
     filter: blur(100px) saturate(150%);
     top: 80px;
-    opacity: 0.15;
+    opacity: 0.24;
   }
 
   .app {
-    @apply relative z-10 flex justify-center items-center flex-col max-w-7xl mx-auto sm:px-16 px-6;
+    @apply relative z-10 flex justify-center items-center flex-col max-w-7xl mx-auto sm:px-16 ;
   }
 
 
@@ -95,6 +95,7 @@
       opacity: 1;
     }
   }
+
 
 
 
