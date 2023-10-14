@@ -1,10 +1,8 @@
 import mongoose, {Schema, model, models} from "mongoose";
 
 const newimage = new Schema({
-    filename: String,
-    path: String,
-    originalname: String
+    url: String
 })
 
-const Photos = models.Images || model("Images", newimage)
+export const imageLinks = models.Images || model("Images", newimage)
 

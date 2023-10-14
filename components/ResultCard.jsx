@@ -1,4 +1,6 @@
+
 import React, { useState } from "react";
+
 
 const ResultCard = ({ post }) => {
   const [arrays, setArrays] = useState(post.anotherGrades)
@@ -22,10 +24,10 @@ const ResultCard = ({ post }) => {
       {/*--------------------------  */}
 
       <div className="flex flex-col">
-        <div className="flex mt-2 flex-col px-2 items-center">
+        <div className="flex mt-2 flex-col px-2">
           <div className="flex w-full">
-            <div className="flex basis-1/2">
-              <h1 className="mr-2">1</h1>
+            <div className="flex basis-1/2 items-end">
+              <h1 className='mr-4 font-lobster font-normal text-2xl'>1<span className="font-sans text-xs font-extralight">st</span></h1>
               <h1>{post.first.name}</h1>
             </div>
 
@@ -39,8 +41,8 @@ const ResultCard = ({ post }) => {
           </div>
           {post.anotherFirst && (
             <div className="flex w-full">
-              <div className="flex basis-1/2">
-                {post.anotherFirst.afName && <h1 className="mr-2">1</h1>}
+              <div className="flex basis-1/2 items-end">
+                {post.anotherFirst.afName && <h1 className="mr-3 font-lobster font-normal text-2xl">1<span className="font-sans text-xs">st</span></h1>}
 
                 <h1>{post.anotherFirst.afName}</h1>
               </div>
@@ -60,8 +62,9 @@ const ResultCard = ({ post }) => {
 
         <div className="flex mt-2 flex-col px-2 items-center">
           <div className="flex w-full">
-            <div className="flex basis-1/2">
-              <h1 className="mr-2">2</h1>
+            <div className="flex basis-1/2 items-end">
+              
+              <h1 className="mr-2 font-lobster text-2xl font-normal">2<span className="font-sans text-xs font-extralight">nd</span></h1>
               <h1>{post.second.secName}</h1>
             </div>
 
@@ -78,8 +81,8 @@ const ResultCard = ({ post }) => {
 
           {post.anotherSecond && (
             <div className="flex w-full">
-              <div className="flex basis-1/2">
-                {post.anotherSecond.asName && <h1 className="mr-2">2</h1>}
+              <div className="flex basis-1/2 items-end">
+                {post.anotherSecond.asName && <h1 className="mr-2 font-lobster font-normal text-2xl">2<span className="font-sans text-xs font-extralight">nd</span></h1>}
                 <h1>{post.anotherSecond.asName}</h1>
               </div>
               <div className="flex basis-1/2 ">
@@ -96,10 +99,10 @@ const ResultCard = ({ post }) => {
           )}
         </div>
 
-        <div className="flex mt-2 flex-col px-2 items-center">
+        <div className="flex mt-2 flex-col px-2 items-end">
           <div className="flex w-full">
-            <div className="flex basis-1/2">
-              <h1 className="mr-2">3</h1>
+            <div className="flex basis-1/2 items-end">
+              <h1 className="mr-2 font-lobster font-normal text-2xl">3<span className="font-sans text-xs font-extralight">rd</span></h1>
               <h1>{post.third.thrName}</h1>
             </div>
 
@@ -116,8 +119,8 @@ const ResultCard = ({ post }) => {
 
           {post.anotherThird && (
             <div className="flex w-full">
-              <div className="flex basis-1/2">
-                {post.anotherThird.atName && <h1 className="mr-2">3</h1>}
+              <div className="flex basis-1/2 items-end">
+                {post.anotherThird.atName && <h1 className="mr-2 font-semibold text-2xl">3<span className="font-sans text-xs">rd</span></h1>}
                 <h1>{post.anotherThird.atName}</h1>
               </div>
               <div className="flex basis-1/2 ">
@@ -136,8 +139,8 @@ const ResultCard = ({ post }) => {
           {arrays && arrays.map((data, index) => (
             <div className="flex w-full mt-2 text-gray-600" key={index}>
               <div className="flex basis-1/2">
-                {arrays && <h1 className="mr-[4px] font-bold">--</h1>}
-                <h1 >{arrays[index].addName}</h1>
+                {arrays && <h1 className="ml-3 font-bold">--</h1>}
+                <h1 className="ml-2">{arrays[index].addName}</h1>
               </div>
 
               <div className="flex basis-1/2" key={index}>

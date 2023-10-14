@@ -77,7 +77,6 @@ export const GET = async (req) => {
         })
 
         const studentData = Object.keys(students).map(name => ({ name, points: students[name].points, team: students[name].team}));
-        console.log(studentData);
         
         return new Response(JSON.stringify(studentData), {status:201})
     } catch (error) {

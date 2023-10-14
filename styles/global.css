@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap'); */
 
 .bg {
   background: #f3f3f3;
@@ -10,16 +11,8 @@
   z-index: 1;
   position: fixed;
 }
-/* .bg::after {
-  content: "";
-  background-image: url("/images/grid.svg");
-  opacity: 0.3;
-  z-index: 3;
-  position: absolute;
-  filter: invert(1);
-  width: 100%;
-  height: 100%;
-} */
+
+
 .main {
     width: 100vw;
     min-height: 100vh;
@@ -31,7 +24,6 @@
   }
   
   .main:before {
-    /* background: radial-gradient(circle, rgba(2, 0, 36, 0) 0, #fafafa 100%); */
     position: absolute;
     content: "";
     z-index: 2;
@@ -39,18 +31,6 @@
     height: 100%;
     top: 0;
   }
-  
-  /* .main:after {
-    content: "";
-    background-image: url("/images/grid.svg");
-    z-index: 1;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    opacity: 0.4;
-    filter: invert(1);
-  } */
   
   .gradient {
     height: fit-content;
@@ -78,7 +58,7 @@
   }
 
   .app {
-    @apply relative z-10 flex justify-center items-center flex-col max-w-7xl mx-auto sm:px-16 ;
+    @apply relative z-10 flex justify-center items-center flex-col max-w-7xl mx-auto sm:px-16;
   }
 
 
@@ -96,7 +76,46 @@
     }
   }
 
+.card {
+  height: 400px;
+  width: 400px;
+  position: relative;
+}
 
+.overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hover {
+  background-color: black;
+  opacity: 0.93;
+  transition: .4s;
+}
+
+.hover .download{
+  display: inline-block;
+}
+
+.download{
+  position: absolute;
+  left: 30%;
+  border: 3px solid white;
+  border-radius: 10px;
+  background: none;
+  color: white;
+  display: none;
+}
+
+/* .orbitron {
+  @apply font-orbitron
+} */
 
 
   

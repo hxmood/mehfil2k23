@@ -36,12 +36,12 @@ const page = () => {
       {points.length !== 0 ? (
         <><div className="flex flex-col">
           {/* <h1 className="font-bold text-blue-800 text-2xl">Participants</h1> */}
-          <h1 className="font-semibold text-xl mt-6">B zone</h1>
+          <h1 className="font-semibold text-xl mt-4">B zone</h1>
           <div className="flex flex-col mt-2 bg-[#fdfdfd] shadow-lg w-full p-3 rounded-md">
             {filteredBZone.length !== 0 && (
             filteredBZone.map((item, index) => (
               
-            <div className="flex items-center px-2" key={index}>
+            <div className="flex items-center px-2 capitalize" key={index}>
               <div className="flex basis-1/2 w-full">
                 <h1 className="mr-2">{index + 1}.</h1>
                 <h1>{item.name}</h1>
@@ -62,7 +62,7 @@ const page = () => {
             <div className="flex flex-col mt-2 bg-[#fdfdfd] shadow-lg w-full p-3 rounded-md">
               {filteredCZone.length !== 0 &&
                 filteredCZone.map((item, index) => (
-                  <div className="flex items-center px-2" key={index}>
+                  <div className="flex items-center px-2 capitalize" key={index}>
                     <div className="flex basis-1/2 w-full">
                       <h1 className="mr-2">{index + 1}.</h1>
                       <h1>{item.name}</h1>
@@ -80,7 +80,7 @@ const page = () => {
             <h1 className="font-semibold text-xl">Y zone</h1>
             <div className="flex flex-col mt-2 bg-[#fdfdfd] shadow-lg w-full p-3 rounded-md">
               {filteredYZone.map((item, index) => (
-                <div className="flex items-center px-2" key={index}>
+                <div className="flex items-center px-2 capitalize" key={index}>
                   <div className="flex basis-1/2 w-full">
                     <h1 className="mr-2">{index + 1}.</h1>
                     <h1>{item.name}</h1>

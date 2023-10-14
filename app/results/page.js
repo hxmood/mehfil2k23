@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react'
 
 const ResultcardLists = ({datas}) => {
   return(
-    <div className='flex flex-col-reverse w-full gap-y-3 mb-4 px-6'>
+    <div className='flex flex-col-reverse w-full gap-y-3 mb-4 px-5'>
       {datas.map((post)=> (
         <ResultCard post={post}/>
       ))}
@@ -19,15 +19,15 @@ const ResultcardLists = ({datas}) => {
 const page = () => {
 const [results, setResults] = useState([])
 
-// useEffect(() => {
-//   const fetchRes = async() => {
-//     const response = await fetch("/api/results")
-//     const datas = await response.json()
-//     setResults(datas)
-//     console.log(datas);
-//   } 
-//   fetchRes()
-// }, [])
+useEffect(() => {
+  const fetchRes = async() => {
+    const response = await fetch("/api/results")
+    const datas = await response.json()
+    setResults(datas)
+    console.log(datas);
+  } 
+  fetchRes()
+}, [])
 
   const [category, setCategory] = useState('')
   console.log(category)
