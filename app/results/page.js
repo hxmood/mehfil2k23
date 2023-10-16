@@ -17,19 +17,19 @@ const ResultcardLists = ({ datas }) => {
 const page = () => {
   const [results, setResults] = useState([]);
 
+  const fetchRes = async () => {
+    try {
+      const response = await fetch("/api/results",{
+        cache: 'no-store'
+      });
+      const datas = await response.json();
+      setResults(datas);
+      console.log(datas);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
-    const fetchRes = async () => {
-      try {
-        const response = await fetch("/api/results",{
-          cache: 'no-store'
-        });
-        const datas = await response.json();
-        setResults(datas);
-        console.log(datas);
-      } catch (error) {
-        console.log(error);
-      }
-    };
     fetchRes();
   }, []);
 
