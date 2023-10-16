@@ -94,7 +94,7 @@ export const page = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("/api/resUpload/new", {
+      const response = await fetch("/api/resUpload", {
         method: "POST",
         body: JSON.stringify({
           res: resultItem.item,
@@ -127,52 +127,54 @@ export const page = () => {
         }),
       });
 
-      alert("results posted successfully");
-      setResultItem({
-        item: "",
-        category: "",
-      });
-      setFirstResult({
-        name: "",
-        team: "",
-        grade: "",
-        marks: "",
-      });
-      setSecondResult({
-        secName: "",
-        secTeam: "",
-        secGrade: "",
-        secMarks: "",
-      });
-      setThirdResult({
-        thrName: "",
-        thrTeam: "",
-        thrGrade: "",
-        thrMarks: "",
-      });
+      if (response.ok) {
+        alert("results posted successfully");
+        setResultItem({
+          item: "",
+          category: "",
+        });
+        setFirstResult({
+          name: "",
+          team: "",
+          grade: "",
+          marks: "",
+        });
+        setSecondResult({
+          secName: "",
+          secTeam: "",
+          secGrade: "",
+          secMarks: "",
+        });
+        setThirdResult({
+          thrName: "",
+          thrTeam: "",
+          thrGrade: "",
+          thrMarks: "",
+        });
 
-      setAnotherFirstResult({
-        afName: "",
-        afTeam: "",
-        afGrade: "",
-        afMarks: "",
-      });
+        setAnotherFirstResult({
+          afName: "",
+          afTeam: "",
+          afGrade: "",
+          afMarks: "",
+        });
 
-      setAnotherSecondResult({
-        asName: "",
-        asTeam: "",
-        asGrade: "",
-        asMarks: "",
-      });
+        setAnotherSecondResult({
+          asName: "",
+          asTeam: "",
+          asGrade: "",
+          asMarks: "",
+        });
 
-      setAnotherThirdResult({
-        atName: "",
-        atTeam: "",
-        atGrade: "",
-        atMarks: "",
-      });
+        setAnotherThirdResult({
+          atName: "",
+          atTeam: "",
+          atGrade: "",
+          atMarks: "",
+        });
 
-      setAddItems([]);
+        setAddItems([]);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -205,10 +207,7 @@ export const page = () => {
               Individual results
             </h1>
             <div className=" flex flex-1 mt-4 p-6 relative">
-              <form
-                onSubmit={handleSubmit}
-                className="flex flex-1 flex-col"
-              >
+              <form onSubmit={handleSubmit} className="flex flex-1 flex-col">
                 <div className="flex gap-3 items-center mb-6">
                   <div className="flex-1 flex gap-3 items-center">
                     <label>result:</label>

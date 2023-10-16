@@ -1,17 +1,10 @@
 import mongoose from "mongoose"
 
 let isConnected = false
-
 const connectMongoDB = async () => {
 
-    mongoose.set("strictQuery",true)
-    if(isConnected) {
-        console.log("mongodb is aldready connected");
-        return
-    }
-
     try {
-        await mongoose.connect(process.env.MONGODB_URI,{
+         mongoose.connect(process.env.MONGODB_URI,{
             dbName: "suffa_mehfil",
         })
         isConnected = true
