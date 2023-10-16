@@ -2,14 +2,7 @@ import resultModels from "@/models/result"
 import connectMongoDB from "@/utils/database"
 import { names } from "@/names/page"
 
-export const GET = async (req) => {
-
-    const allNames = [].concat(...Object.values(names));
-    const result = allNames.reduce((acc, name) => {
-        acc[name] = 0;
-        return acc;
-      }, {});
-    
+export const GET = async (req) => {    
 
     try {
         await connectMongoDB()

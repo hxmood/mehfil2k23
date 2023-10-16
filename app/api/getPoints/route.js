@@ -5,7 +5,7 @@ export const GET =  async (req) => {
   try {
     await connectMongoDB();
 
-    const results = await pointsModel.find();
+    const results = await pointsModel.find({});
     
     const totalPoints = results.reduce((acc, result) => {
       acc[result.team] = (acc[result.team] || 0) + result.points;

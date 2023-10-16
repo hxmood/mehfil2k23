@@ -36,9 +36,6 @@ export const GET = async(req) => {
             
             })
 
-        console.log(totalPoints)
-       
-
         return new Response(JSON.stringify(totalPoints), {status: 201})
     } catch (error) {
         return new Response(error)
