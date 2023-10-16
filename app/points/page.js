@@ -6,9 +6,14 @@ const page = () => {
   const [points, setPoints] = useState([]);
   useEffect(() => {
     const fetchRes = async () => {
-      const response = await fetch("/api/participantPoints");
-      const datas = await response.json();
-      setPoints(datas);
+      try {
+        const response = await fetch("/api/participantPoints");
+        const datas = await response.json();
+        setPoints(datas);
+      } catch (error) {
+        console.log(error);
+      }
+     
     };
     fetchRes();
   }, []);

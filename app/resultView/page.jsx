@@ -12,9 +12,14 @@ const page = () => {
 
   useEffect(() => {
     const fetchResults = async () => {
-      const response = await fetch("/api/results");
+      try {
+        const response = await fetch("/api/results");
       const data = await response.json();
       setResults(data);
+      } catch (error) {
+        console.log();
+      }
+      
       
     };
     fetchResults();

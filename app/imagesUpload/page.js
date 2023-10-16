@@ -34,12 +34,17 @@ const page = () => {
 
 
   useEffect(() => {
-    listAll(imageListsRef).then((response) => {
-      const promises = response.items.map((item) => getDownloadURL(item));
-      Promise.all(promises).then((urls) => {
-        setImageLinks(urls);
+    try {
+      listAll(imageListsRef).then((response) => {
+        const promises = response.items.map((item) => getDownloadURL(item));
+        Promise.all(promises).then((urls) => {
+          setImageLinks(urls);
+        });
       });
-    });
+    } catch (error) {
+      console.log(error);
+    }
+    
   }, []);
 
 

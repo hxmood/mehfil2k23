@@ -6,9 +6,14 @@ const page = () => {
   const [totalPoints, setTotalPoints] = useState(null);
   useEffect(() => {
     const fetchRes = async () => {
-      const response = await fetch("/api/teamPoints");
+      try {
+        const response = await fetch("/api/teamPoints");
       const datas = await response.json();
       setTotalPoints(datas);
+      } catch (error) {
+        console.log(error);
+      }
+      
     };
     fetchRes();
   }, []);
