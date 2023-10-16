@@ -24,13 +24,13 @@ useEffect(() => {
     const response = await fetch("/api/results")
     const datas = await response.json()
     setResults(datas)
-    console.log(datas);
+    console.log('datas',datas);
   } 
   fetchRes()
 }, [])
 
   const [category, setCategory] = useState('')
-  console.log(category)
+  console.log('catagory',category)
   const filteredItems = category ? results?.filter(zone => zone.category == category) : results
 
 
