@@ -19,14 +19,11 @@ const ResultcardLists = ({datas}) => {
 const page = () => {
 const [results, setResults] = useState([])
 
-useEffect(() => {
-  const fetchRes = async() => {
+useEffect(async() => {
     const response = await fetch("/api/results")
     const datas = await response.json()
     setResults(datas)
     console.log('datas',datas);
-  } 
-  fetchRes()
 }, [])
 
   const [category, setCategory] = useState('')

@@ -19,7 +19,6 @@ const page = () => {
     };
     fetchResults();
   }, []);
-  console.log(results);
 
   const handleEdit = (post) => {
     router.push(`/editResult?id=${post._id}`)
