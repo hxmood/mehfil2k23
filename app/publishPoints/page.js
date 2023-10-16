@@ -32,7 +32,9 @@ const page = () => {
   useEffect(() => {
     const fetchRes = async () => {
       try {
-        const response = await fetch("/api/teamPoints");
+        const response = await fetch("/api/teamPoints", {
+          cache: "no-store"
+        });
         const datas = await response.json();
         setTotalPoints(datas);
         console.log(datas);

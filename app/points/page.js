@@ -7,7 +7,9 @@ const page = () => {
   useEffect(() => {
     const fetchRes = async () => {
       try {
-        const response = await fetch("/api/participantPoints");
+        const response = await fetch("/api/participantPoints", {
+          cache: 'no-store'
+        });
         const datas = await response.json();
         setPoints(datas);
       } catch (error) {

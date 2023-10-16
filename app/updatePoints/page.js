@@ -7,13 +7,14 @@ const page = () => {
   useEffect(() => {
     const fetchRes = async () => {
       try {
-        const response = await fetch("/api/teamPoints");
-      const datas = await response.json();
-      setTotalPoints(datas);
+        const response = await fetch("/api/teamPoints", {
+          cache: "no-store"
+        });
+        const datas = await response.json();
+        setTotalPoints(datas);
       } catch (error) {
         console.log(error);
       }
-      
     };
     fetchRes();
   }, []);
@@ -30,22 +31,20 @@ const page = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-        for(const [team, points] of sortedTeams) {
-            await fetch("/api/updatePoints", {
-                method: "PUT",
-                body: JSON.stringify({
-                    team: team,
-                    points: points
-                })
-            })
-        }
-        alert("points updated successfully")
-
-        
+      for (const [team, points] of sortedTeams) {
+        await fetch("/api/updatePoints", {
+          method: "PUT",
+          body: JSON.stringify({
+            team: team,
+            points: points,
+          }),
+        });
+      }
+      alert("points updated successfully");
     } catch (error) {
-        console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   return (
     <div className="flex flex-col space-y-4 justify-center">
@@ -56,7 +55,12 @@ const page = () => {
         </div>
       ))}
 
-      <button className="bg-green-800 font-semibold px-3 py-2 text-white" onClick={handleUpdate}>Update points</button>
+      <button
+        className="bg-green-800 font-semibold px-3 py-2 text-white"
+        onClick={handleUpdate}
+      >
+        Update points
+      </button>
     </div>
   );
 };

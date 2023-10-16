@@ -20,7 +20,9 @@ const page = () => {
   useEffect(() => {
     const fetchRes = async () => {
       try {
-        const response = await fetch("/api/results");
+        const response = await fetch("/api/results",{
+          cache: 'no-store'
+        });
         const datas = await response.json();
         setResults(datas);
         console.log(datas);
