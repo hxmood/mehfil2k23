@@ -11,8 +11,10 @@ const connectMongoDB = async () => {
     }
 
     try {
-        await mongoose.connect("mongodb+srv://mhdibnhameed:mehfil_2k23@cluster0.4tx0htv.mongodb.net/?retryWrites=true&w=majority",{
+        await mongoose.connect(process.env.MONGODB_URI,{
             dbName: "suffa_mehfil",
+            useNewUrlParser: true,
+            useUnifiedTopology: true
         })
         isConnected = true
         console.log("mongodb is connected");

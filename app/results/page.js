@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react'
 const ResultcardLists = ({datas}) => {
   return(
     <div className='flex flex-col-reverse w-full gap-y-3 mb-4 px-5'>
-      {datas?.map((post)=> (
+      {datas.map((post)=> (
         <ResultCard post={post}/>
       ))}
     </div>
@@ -19,16 +19,19 @@ const ResultcardLists = ({datas}) => {
 const page = () => {
 const [results, setResults] = useState([])
 
-useEffect(async() => {
+useEffect(() => {
+  const fetchRes = async() => {
     const response = await fetch("/api/results")
     const datas = await response.json()
     setResults(datas)
-    console.log('datas',datas);
+    console.log(datas);
+  } 
+  fetchRes()
 }, [])
 
   const [category, setCategory] = useState('')
-  console.log('catagory',category)
-  const filteredItems = category ? results?.filter(zone => zone.category == category) : results
+  console.log(category)
+  const filteredItems = category ? results.filter(zone => zone.category == category) : results
 
 
 
@@ -48,7 +51,7 @@ useEffect(async() => {
       </div>
       
       
-      {results?.length !== 0 ? <ResultcardLists datas={filteredItems}/> : <h1 className='text-md mt-6'>Results not published yet</h1>}
+      {results.length !== 0 ? <ResultcardLists datas={filteredItems}/> : <h1 className='text-md mt-6'>Results not published yet</h1>}
       
     </div>
   )
