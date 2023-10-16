@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react'
 const ResultcardLists = ({datas}) => {
   return(
     <div className='flex flex-col-reverse w-full gap-y-3 mb-4 px-5'>
-      {datas.map((post)=> (
+      {datas?.map((post)=> (
         <ResultCard post={post}/>
       ))}
     </div>
@@ -31,7 +31,7 @@ useEffect(() => {
 
   const [category, setCategory] = useState('')
   console.log(category)
-  const filteredItems = category ? results.filter(zone => zone.category == category) : results
+  const filteredItems = category ? results?.filter(zone => zone.category == category) : results
 
 
 
@@ -51,7 +51,7 @@ useEffect(() => {
       </div>
       
       
-      {results.length !== 0 ? <ResultcardLists datas={filteredItems}/> : <h1 className='text-md mt-6'>Results not published yet</h1>}
+      {results?.length !== 0 ? <ResultcardLists datas={filteredItems}/> : <h1 className='text-md mt-6'>Results not published yet</h1>}
       
     </div>
   )
