@@ -1,7 +1,7 @@
 "use client";
+
 import React, { useState } from "react";
 import { names } from "@/names/page";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 export const page = () => {
@@ -21,7 +21,6 @@ export const page = () => {
     grade: "",
     marks: "",
   });
-  console.log(firstResult.name);
 
   const [secondResult, setSecondResult] = useState({
     secName: "",
@@ -99,31 +98,13 @@ export const page = () => {
         body: JSON.stringify({
           res: resultItem.item,
           category: resultItem.category,
-          name: firstResult.name,
-          team: firstResult.team,
-          grade: firstResult.grade,
-          marks: firstResult.marks,
-          secName: secondResult.secName,
-          secTeam: secondResult.secTeam,
-          secGrade: secondResult.secGrade,
-          secMarks: secondResult.secMarks,
-          thrName: thirdResult.thrName,
-          thrTeam: thirdResult.thrTeam,
-          thrGrade: thirdResult.thrGrade,
-          thrMarks: thirdResult.thrMarks,
-          afName: anotherFirstResult.afName,
-          afTeam: anotherFirstResult.afTeam,
-          afGrade: anotherFirstResult.afGrade,
-          afMarks: anotherFirstResult.afMarks,
-          asName: anotherSecondResult.asName,
-          asTeam: anotherSecondResult.asTeam,
-          asGrade: anotherSecondResult.asGrade,
-          asMarks: anotherSecondResult.asMarks,
-          atName: anotherThirdResult.atName,
-          atTeam: anotherThirdResult.atTeam,
-          atGrade: anotherThirdResult.atGrade,
-          atMarks: anotherThirdResult.atMarks,
-          anotherGrades: addItems,
+          first: firstResult,
+          second: secondResult,
+          third: thirdResult,
+          anotherFirst: anotherFirstResult,
+          anotherSecond: anotherSecondResult,
+          anotherThird: anotherThird,
+          anotherGrades: addItems
         }),
       });
 

@@ -1,24 +1,23 @@
-import resultModels from "@/models/result"
+
+
+
+
 import connectMongoDB from "@/utils/database"
+import resultModels from "@/models/result"
 
 export const POST = async (req) => {
-    const {res,category,name,team,grade,marks,
-        secName,secTeam,secGrade,secMarks,
-        thrName,thrTeam,thrGrade,thrMarks, 
-        afName, afTeam, afGrade, afMarks,
-        asName, asTeam, asGrade, asMarks,
-        atName, atTeam, atGrade, atMarks, anotherGrades} = await req.json()
+    const {res, category, first, second, third, anotherFirst, anotherSecond, anotherThird, anotherGrades} = await req.json()
     try {
         await connectMongoDB()
         const newResult = new resultModels({
             res, category, 
-            first: { name, team, grade, marks},
-            second: {secName,secTeam,secGrade,secMarks,},
-            third: {thrName,thrTeam,thrGrade,thrMarks},
-            anotherFirst: {afName, afTeam, afGrade, afTeam, afMarks},
-            anotherSecond: {asName, asTeam, asGrade, asMarks},
-            anotherThird: {atName, atTeam, atGrade, atMarks},
-            anotherGrades: anotherGrades
+            first,
+            second,
+            third,
+            anotherFirst,
+            anotherSecond,
+            anotherThird,
+            anotherGrades
         })
 
         await newResult.save()
