@@ -1,6 +1,7 @@
 // pages/api/updatePoints.js
 import connectMongoDB from "@/utils/database";
 import pointsModel from "@/models/totalPoints";
+import { NextResponse } from "next/server";
 
 export const PUT = async (req) => {
   try {
@@ -12,8 +13,8 @@ export const PUT = async (req) => {
       { $set: { points: points } }
     );
 
-    return new Response(JSON.stringify(result), { status: 200 });
+    return NextResponse.json(result);
   } catch (error) {
-    return new Response("failed to update", { status: 500 });
+    return NextResponse.json({message:"failed to update"}, { status: 500 });
   }
 };

@@ -24,7 +24,6 @@ const page = () => {
       });
       const datas = await response.json();
       setResults(datas);
-      console.log(datas);
     } catch (error) {
       console.log(error);
     }
@@ -34,7 +33,6 @@ const page = () => {
   }, []);
 
   const [category, setCategory] = useState("");
-  console.log(category);
   const filteredItems = category
     ? results.filter((zone) => zone.category == category)
     : results;

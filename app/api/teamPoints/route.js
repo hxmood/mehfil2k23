@@ -1,5 +1,6 @@
 import resultModels from "@/models/result";
 import connectMongoDB from "@/utils/database";
+import { NextResponse } from "next/server";
 
 export const GET = async(req) => {
     try {
@@ -16,28 +17,10 @@ export const GET = async(req) => {
                 totalPoints[result.first.team] += result.first.marks,
                 totalPoints[result.second.secTeam] += result.second.secMarks,
                 totalPoints[result.third.thrTeam] += result.third.thrMarks
-                if(result.anotherFirst.afMarks) {
-                    totalPoints[result.anotherFirst.afTeam] += result.anotherFirst.afMarks
-                }
-    
-                if(result.anotherSecond.asMarks) {
-                    totalPoints[result.anotherSecond.asTeam] += result.anotherSecond.asMarks
-                }
-    
-                if(result.anotherThird.atMarks) {
-                    totalPoints[result.anotherThird.atTeam] += result.anotherThird.atMarks
-                }
-    
-                if(result.anotherGrades) {
-                    result.anotherGrades.forEach(item => {
-                        totalPoints[item.addTeam] += item.addMarks
-                    })
-                }
-            
             })
 
-        return new Response(JSON.stringify(totalPoints), {status: 201})
+        return NextResponse.json(totalPoints)
     } catch (error) {
-        return new Response(error)
+        return NextResponse.json({message: 'failed to calculate team points'}, {status: 500})
     }
 }

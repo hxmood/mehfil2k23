@@ -38,29 +38,6 @@ const ResultCard = ({ post }) => {
               </div>
             </div>
           </div>
-          {post.anotherFirst && (
-            <div className="flex w-full">
-              <div className="flex basis-1/2 items-end">
-                {post.anotherFirst.afName && (
-                  <h1 className="mr-3 font-lobster font-normal text-2xl">
-                    1<span className="font-sans text-xs">st</span>
-                  </h1>
-                )}
-
-                <h1>{post.anotherFirst.afName}</h1>
-              </div>
-              <div className="flex basis-1/2 ">
-                <div className="grid w-full grid-cols-3 place-items-end">
-                  <h2>{post.anotherFirst.afGrade}</h2>
-                  <h2>{post.anotherFirst.afMarks}</h2>
-                  <p className="text-gray-500">
-                    {firstletter(post.anotherFirst.afTeam)}
-                  </p>
-                </div>
-                <hr />
-              </div>
-            </div>
-          )}
         </div>
 
         <div className="flex mt-2 flex-col px-2 items-center">
@@ -83,31 +60,6 @@ const ResultCard = ({ post }) => {
             </div>
           </div>
 
-          {post.anotherSecond && (
-            <div className="flex w-full">
-              <div className="flex basis-1/2 items-end">
-                {post.anotherSecond.asName && (
-                  <h1 className="mr-2 font-lobster font-normal text-2xl">
-                    2
-                    <span className="font-sans text-xs font-extralight">
-                      nd
-                    </span>
-                  </h1>
-                )}
-                <h1>{post.anotherSecond.asName}</h1>
-              </div>
-              <div className="flex basis-1/2 ">
-                <div className="grid w-full grid-cols-3 place-items-end">
-                  <h2>{post.anotherSecond.asGrade}</h2>
-                  <h2>{post.anotherSecond.asMarks}</h2>
-                  <p className="text-gray-500">
-                    {firstletter(post.anotherSecond.asTeam)}
-                  </p>
-                </div>
-                <hr />
-              </div>
-            </div>
-          )}
         </div>
 
         <div className="flex mt-2 flex-col px-2 items-end">
@@ -129,29 +81,6 @@ const ResultCard = ({ post }) => {
               </div>
             </div>
           </div>
-
-          {post.anotherThird && (
-            <div className="flex w-full">
-              <div className="flex basis-1/2 items-end">
-                {post.anotherThird.atName && (
-                  <h1 className="mr-2 font-semibold text-2xl">
-                    3<span className="font-sans text-xs">rd</span>
-                  </h1>
-                )}
-                <h1>{post.anotherThird.atName}</h1>
-              </div>
-              <div className="flex basis-1/2 ">
-                <div className="grid w-full grid-cols-3 place-items-end">
-                  <h2>{post.anotherThird.atGrade}</h2>
-                  <h2>{post.anotherThird.atMarks}</h2>
-                  <p className="text-gray-500">
-                    {firstletter(post.anotherThird.atTeam)}
-                  </p>
-                </div>
-                <hr />
-              </div>
-            </div>
-          )}
 
           {arrays &&
             arrays.map((data, index) => (

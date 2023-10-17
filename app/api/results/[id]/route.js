@@ -2,6 +2,7 @@
 
 import resultModels from "@/models/result";
 import connectMongoDB from "@/utils/database";
+import { NextResponse } from "next/server";
 
 export const GET = async (req, {params}) => {
   try {
@@ -9,12 +10,12 @@ export const GET = async (req, {params}) => {
     await connectMongoDB();
     const results = await resultModels.findById(params.id);
     if (!results) {
-        return new Response("prompt not found", {status: 404})
+        return NextResponse({message:"prompt not found"}, {status: 404})
     }
-    return new Response(JSON.stringify(results), { status: 201 });
+    return NextResponse(results);
 
   } catch (error) {
-    return new Response("failed to fetch results")
+    return NextResponse({message:"failed to fetch results"},{status:500})
   }
 }
 
@@ -46,10 +47,10 @@ export const PATCH = async (req, {params}) => {
 
         await result.save()
 
-        return new Response(JSON.stringify(result), {status: 201})
+        return NextResponse.json(result)
 
     } catch (error) {
-        return new Response("failed to fetch" ,{status: 500})
+        return NextResponse.json({message:"failed to fetch"} ,{status: 500})
     }
 }
 
@@ -62,8 +63,8 @@ export const DELETE = async(req, {params}) => {
 
         await resultModels.findByIdAndRemove(params.id)
 
-        return new Response("successfully deleted", {status: 201})
+        return NextResponse.json({message:"successfully deleted"}, {status: 201})
     } catch (error) {
-        return new Response("failed to delete", {status: 500})
+        return NextResponse.json({message:"failed to delete"}, {status: 500})
     }
 }

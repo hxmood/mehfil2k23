@@ -4,18 +4,18 @@ import React, { useEffect, useState } from "react";
 
 const page = () => {
   const [totalPoints, setTotalPoints] = useState(null);
+  const fetchRes = async () => {
+    try {
+      const response = await fetch("/api/teamPoints", {
+        cache: "no-store",
+      });
+      const datas = await response.json();
+      setTotalPoints(datas);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
-    const fetchRes = async () => {
-      try {
-        const response = await fetch("/api/teamPoints", {
-          cache: "no-store"
-        });
-        const datas = await response.json();
-        setTotalPoints(datas);
-      } catch (error) {
-        console.log(error);
-      }
-    };
     fetchRes();
   }, []);
 

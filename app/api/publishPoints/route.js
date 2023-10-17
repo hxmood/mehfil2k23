@@ -1,5 +1,6 @@
 import pointsModel from "@/models/totalPoints";
 import connectMongoDB from "@/utils/database";
+import { NextResponse } from "next/server";
 
 export const POST = async (req) => {
   const { team, points } = await req.json();
@@ -11,8 +12,8 @@ export const POST = async (req) => {
     });
 
     await publishedPoints.save();
-    return new Response(JSON.stringify(publishedPoints), { status: 201 });
+    return NextResponse.json(publishedPoints)
   } catch (error) {
-    return new Response("Error: " + error.message, { status: 500 });
+    return NextResponse.json({message: "Error: " + error.message}, { status: 500 });
   }
 };

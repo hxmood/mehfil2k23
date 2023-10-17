@@ -16,12 +16,6 @@ const page = () => {
           }),
         });
       }
-
-      // Fetch and update the total points after publishing or updating
-      const response = await fetch("/api/getPoints");
-      const data = await response.json();
-      setUpdate(data);
-
       alert("Results published successfully!");
     } catch (error) {
       console.error("Error:", error);
@@ -29,19 +23,18 @@ const page = () => {
     }
   };
 
+  const fetchRes = async () => {
+    try {
+      const response = await fetch("/api/teamPoints", {
+        cache: "no-store"
+      });
+      const datas = await response.json();
+      setTotalPoints(datas);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
-    const fetchRes = async () => {
-      try {
-        const response = await fetch("/api/teamPoints", {
-          cache: "no-store"
-        });
-        const datas = await response.json();
-        setTotalPoints(datas);
-        console.log(datas);
-      } catch (error) {
-        console.log(error);
-      }
-    };
     fetchRes();
   }, []);
 
