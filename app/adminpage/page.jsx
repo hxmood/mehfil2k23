@@ -66,7 +66,7 @@ export const page = () => {
     };
   
     try {
-      const res = await fetch('/api/resultUpload', {
+      const res = await fetch('/api/results', {
         method: "POST",
         headers: {
           "content-type": "application/json"
