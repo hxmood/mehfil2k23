@@ -2,6 +2,10 @@ import pointsModel from "@/models/totalPoints";
 import connectMongoDB from "@/utils/database";
 import { NextResponse } from "next/server";
 
+export const GET = async () => {
+  await connectMongoDB()
+}
+
 export const POST = async (req) => {
   const { team, points } = await req.json();
   try {

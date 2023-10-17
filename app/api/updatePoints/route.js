@@ -3,6 +3,10 @@ import connectMongoDB from "@/utils/database";
 import pointsModel from "@/models/totalPoints";
 import { NextResponse } from "next/server";
 
+export const GET = async () => {
+  await connectMongoDB()
+}
+
 export const PUT = async (req) => {
   try {
     await connectMongoDB();
