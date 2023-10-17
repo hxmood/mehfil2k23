@@ -1,7 +1,6 @@
 import "@/styles/global.css"
 import Nav from '@/components/Nav'
-import { Inter } from 'next/font/google'
-// const inter = Inter({ subsets: ['latin'] })
+import { Analytics } from '@vercel/analytics/react';
 
 export const metadata = {
   title: 'Suffa Mehfil',
@@ -18,6 +17,7 @@ export default function RootLayout({ children }) {
         <div className="app">
           <Nav/>
           {children}
+          <Analytics />
         </div>
   
       </body>
