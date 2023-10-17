@@ -6,13 +6,13 @@ import Link from "next/link";
 
 export const page = () => {
   const allNames = [].concat(...Object.values(names));
-
   const [selectedForm, setSelectedForm] = useState("individual");
 
   const [resultItem, setResultItem] = useState({
     item: "",
     category: "",
   });
+
   const categorized = names[resultItem.category] || [];
 
   const [firstResult, setFirstResult] = useState({
@@ -36,30 +36,6 @@ export const page = () => {
     thrMarks: "",
   });
 
-  const [anotherFirst, setAnotherFirst] = useState([]);
-  const [anotherFirstResult, setAnotherFirstResult] = useState({
-    afName: "",
-    afTeam: "",
-    afGrade: "",
-    afMarks: "",
-  });
-
-  const [anotherSecond, setAnotherSecond] = useState([]);
-  const [anotherSecondResult, setAnotherSecondResult] = useState({
-    asName: "",
-    asTeam: "",
-    asGrade: "",
-    asMarks: "",
-  });
-
-  const [anotherThird, setAnotherThird] = useState([]);
-  const [anotherThirdResult, setAnotherThirdResult] = useState({
-    atName: "",
-    atTeam: "",
-    atGrade: "",
-    atMarks: "",
-  });
-
   const [addItems, setAddItems] = useState([]);
 
   const handleAddItem = (e) => {
@@ -77,89 +53,66 @@ export const page = () => {
     setAddItems(updatedFormData);
   };
 
-  const handleAnotherFirst = (e) => {
-    e.preventDefault();
-    setAnotherFirst([...anotherFirst, {}]);
-  };
-  const handleAnotherSecond = () => {
-    setAnotherSecond([...anotherSecond, {}]);
-  };
-  const handleAnotherThird = () => {
-    setAnotherThird([...anotherThird, {}]);
-  };
-
-  const deleteItem = () => {};
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+  
+    const requestBody = {
+      res: resultItem.item,
+      category: resultItem.category,
+      first: firstResult,
+      second: secondResult,
+      third: thirdResult,
+      anotherGrades: addItems
+    };
+  
     try {
-      const response = await fetch("/api/resUpload", {
+      const res = await fetch('/api/resultUpload', {
         method: "POST",
-        body: JSON.stringify({
-          res: resultItem.item,
-          category: resultItem.category,
-          first: firstResult,
-          second: secondResult,
-          third: thirdResult,
-          anotherFirst: anotherFirstResult,
-          anotherSecond: anotherSecondResult,
-          anotherThird: anotherThird,
-          anotherGrades: addItems
-        }),
+        headers: {
+          "content-type": "application/json"
+        },
+        body: JSON.stringify(requestBody),
       });
-
-      if (response.ok) {
-        alert("results posted successfully");
+  
+      if (res.ok) {
+        alert("Results posted successfully");
         setResultItem({
           item: "",
           category: "",
         });
+
         setFirstResult({
-          name: "",
-          team: "",
-          grade: "",
-          marks: "",
-        });
+          name: '',
+          team: '',
+          grade: '',
+          marks: ''
+        }),
+
         setSecondResult({
-          secName: "",
-          secTeam: "",
-          secGrade: "",
-          secMarks: "",
-        });
+          secName: '',
+          secTeam: '',
+          secGrade: '',
+          secMarks: ''
+        })
+  
         setThirdResult({
           thrName: "",
           thrTeam: "",
           thrGrade: "",
           thrMarks: "",
         });
-
-        setAnotherFirstResult({
-          afName: "",
-          afTeam: "",
-          afGrade: "",
-          afMarks: "",
-        });
-
-        setAnotherSecondResult({
-          asName: "",
-          asTeam: "",
-          asGrade: "",
-          asMarks: "",
-        });
-
-        setAnotherThirdResult({
-          atName: "",
-          atTeam: "",
-          atGrade: "",
-          atMarks: "",
-        });
-
+  
         setAddItems([]);
+      } else {
+        alert("Failed to post results");
       }
     } catch (error) {
-      console.log(error);
+      console.error("Error:", error);
+      alert("An error occurred while posting results");
     }
   };
+  
+
 
   return (
     <>
@@ -302,109 +255,8 @@ export const page = () => {
                       className="w-full border border-gray-300 p-2 rounded"
                       placeholder="Enter mark"
                     />
-                    <h1
-                      className="ml-4 cursor-pointer text-green-700 font-extrabold text-lg"
-                      onClick={handleAnotherFirst}
-                    >
-                      +
-                    </h1>
                   </div>
                 </div>
-                {/* ------------------------------------------- */}
-
-                {anotherFirst.map(() => (
-                  <div className="grid grid-cols-6 gap-5 ">
-                    <h2 className="col-span-5 font-semibold text-lg">
-                      Another First:
-                    </h2>
-                    <div className="col-span-2">
-                      <select
-                        className="w-full border border-gray-300 p-2 rounded"
-                        value={anotherFirstResult.afMarks}
-                        onChange={(e) =>
-                          setAnotherFirstResult({
-                            ...anotherFirst,
-                            afName: e.target.value,
-                          })
-                        }
-                      >
-                        <option>Select Name</option>
-                        {categorized.length !== 0
-                          ? categorized.map((item) => (
-                              <option value={item}>{item}</option>
-                            ))
-                          : allNames.map((item) => (
-                              <option value={item}>{item}</option>
-                            ))}
-                      </select>
-                    </div>
-
-                    <div className="col-span-2">
-                      <select
-                        className="w-full p-2 rounded border border-gray-300"
-                        value={anotherFirstResult.afTeam}
-                        onChange={(e) =>
-                          setAnotherFirstResult({
-                            ...anotherFirstResult,
-                            afTeam: e.target.value,
-                          })
-                        }
-                      >
-                        <option>Select Team</option>
-                        <option value="Traditional Trackers">
-                          Traditional Trackers
-                        </option>
-                        <option value="Legacy Legends">Legacy Legends</option>
-                        <option value="Ancient Alliance">
-                          Ancient Alliance
-                        </option>
-                        <option value="-">-</option>
-                      </select>
-                    </div>
-
-                    <div className="col-span-1 relative">
-                      <select
-                        className="w-full p-2 border border-gray-300 rounded"
-                        value={anotherFirstResult.afGrade}
-                        onChange={(e) =>
-                          setAnotherFirstResult({
-                            ...anotherFirstResult,
-                            afGrade: e.target.value,
-                          })
-                        }
-                      >
-                        <option>Grade</option>
-                        <option value="A+">A+</option>
-                        <option value="A">A</option>
-                        <option value="B">B</option>
-                        <option value="C">C</option>
-                        <option value="D">D</option>
-                        <option value="-">-</option>
-                      </select>
-                    </div>
-
-                    <div className="col-span-1 flex items-center">
-                      <input
-                        value={anotherFirstResult.afMarks}
-                        onChange={(e) =>
-                          setAnotherFirstResult({
-                            ...anotherFirstResult,
-                            afMarks: e.target.value,
-                          })
-                        }
-                        type="number"
-                        className="w-full border border-gray-300 p-2 rounded"
-                        placeholder="Enter mark"
-                      />
-                      <h1
-                        className="ml-4 text-red-700 cursor-pointer font-extrabold text-lg"
-                        onClick={deleteItem}
-                      >
-                        x
-                      </h1>
-                    </div>
-                  </div>
-                ))}
 
                 {/* ------------------------------ */}
 
@@ -488,112 +340,8 @@ export const page = () => {
                       className="w-full border border-gray-300 p-2 rounded"
                       placeholder="Enter mark"
                     />
-
-                    <h1
-                      className="ml-4 cursor-pointer text-green-700 font-extrabold text-lg"
-                      onClick={handleAnotherSecond}
-                    >
-                      +
-                    </h1>
                   </div>
-                </div>
-
-                {/* ----------------------------------------------------------- */}
-
-                {anotherSecond.map(() => (
-                  <div className="grid grid-cols-6 pt-3 gap-5">
-                    <h2 className="col-span-5 font-semibold text-lg">
-                      Another Second:
-                    </h2>
-                    <div className="col-span-2">
-                      <select
-                        className="w-full border border-gray-300 p-2 rounded"
-                        value={anotherSecondResult.asName}
-                        onChange={(e) =>
-                          setAnotherSecondResult({
-                            ...anotherSecondResult,
-                            asName: e.target.value,
-                          })
-                        }
-                      >
-                        <option>Select Name</option>
-                        {categorized.length !== 0
-                          ? categorized.map((item) => (
-                              <option value={item}>{item}</option>
-                            ))
-                          : allNames.map((item) => (
-                              <option value={item}>{item}</option>
-                            ))}
-                      </select>
-                    </div>
-
-                    {/* ----------------------------------------------------------- */}
-
-                    <div className="col-span-2">
-                      <select
-                        className="w-full p-2 rounded border border-gray-300"
-                        value={anotherSecondResult.asTeam}
-                        onChange={(e) =>
-                          setAnotherSecondResult({
-                            ...anotherSecondResult,
-                            asTeam: e.target.value,
-                          })
-                        }
-                      >
-                        <option>Select Team</option>
-                        <option value="Traditional Trackers">
-                          Traditional Trackers
-                        </option>
-                        <option value="Legacy Legends">Legacy Legends</option>
-                        <option value="Ancient Alliance">
-                          Ancient Alliance
-                        </option>
-                        <option value="-">-</option>
-                      </select>
-                    </div>
-                    <div className="col-span-1 relative">
-                      <select
-                        className="w-full p-2 border border-gray-300 rounded"
-                        value={anotherSecondResult.asGrade}
-                        onChange={(e) =>
-                          setAnotherSecondResult({
-                            ...anotherSecondResult,
-                            asGrade: e.target.value,
-                          })
-                        }
-                      >
-                        <option>Grade</option>
-                        <option value="A+">A+</option>
-                        <option value="A">A</option>
-                        <option value="B">B</option>
-                        <option value="C">C</option>
-                        <option value="D">D</option>
-                        <option value="-">-</option>
-                      </select>
-                    </div>
-                    <div className="col-span-1 flex items-center">
-                      <input
-                        value={anotherSecondResult.asMarks}
-                        onChange={(e) =>
-                          setAnotherSecondResult({
-                            ...anotherSecondResult,
-                            asMarks: e.target.value,
-                          })
-                        }
-                        type="number"
-                        className="w-full border border-gray-300 p-2 rounded"
-                        placeholder="Enter Marks"
-                      />
-
-                      <h1
-                        className="ml-4 cursor-pointer text-red-700 font-extrabold text-lg"
-                        onClick={deleteItem}
-                      >
-                        x
-                      </h1>
-                    </div>
-                  </div>
-                ))}
+                </div>            
 
                 {/* ------------------------------------------- */}
 
@@ -677,112 +425,12 @@ export const page = () => {
                       className="w-full border border-gray-300 p-2 rounded"
                       placeholder="Enter Mark"
                     />
-                    <h1
-                      className="ml-4 cursor-pointer text-green-700 font-extrabold text-lg"
-                      onClick={handleAnotherThird}
-                    >
-                      +
-                    </h1>
                   </div>
                 </div>
 
                 {/* -------------------------------------------------------------------- */}
 
-                {anotherThird.map(() => (
-                  <div className="grid grid-cols-6 pt-3 gap-5">
-                    <h2 className="col-span-5 font-semibold text-lg">
-                      Another Third:
-                    </h2>
-                    <div className="col-span-2">
-                      <select
-                        className="w-full border border-gray-300 p-2 rounded"
-                        value={anotherThirdResult.atName}
-                        onChange={(e) =>
-                          setAnotherThirdResult({
-                            ...anotherThirdResult,
-                            atName: e.target.value,
-                          })
-                        }
-                      >
-                        <option>Select Name</option>
-                        {categorized.length !== 0
-                          ? categorized.map((item) => (
-                              <option value={item}>{item}</option>
-                            ))
-                          : allNames.map((item) => (
-                              <option value={item}>{item}</option>
-                            ))}
-                      </select>
-                    </div>
 
-                    <div className="col-span-2">
-                      <select
-                        className="w-full p-2 rounded border border-gray-300"
-                        value={anotherThirdResult.atTeam}
-                        onChange={(e) =>
-                          setAnotherThirdResult({
-                            ...anotherThirdResult,
-                            atTeam: e.target.value,
-                          })
-                        }
-                      >
-                        <option>Select Team</option>
-                        <option value="Traditional Trackers">
-                          Traditional Trackers
-                        </option>
-                        <option value="Legacy Legends">Legacy Legends</option>
-                        <option value="Ancient Alliance">
-                          Ancient Alliance
-                        </option>
-                        <option value="-">-</option>
-                      </select>
-                    </div>
-
-                    <div className="col-span-1 relative">
-                      <select
-                        className="w-full p-2 border border-gray-300 rounded"
-                        value={anotherThirdResult.atGrade}
-                        onChange={(e) =>
-                          setAnotherThirdResult({
-                            ...anotherThirdResult,
-                            atGrade: e.target.value,
-                          })
-                        }
-                      >
-                        <option>Grade</option>
-                        <option value="A+">A+</option>
-                        <option value="A">A</option>
-                        <option value="B">B</option>
-                        <option value="C">C</option>
-                        <option value="D">D</option>
-                        <option value="-">-</option>
-                      </select>
-                    </div>
-
-                    <div className="col-span-1 flex items-center">
-                      <input
-                        value={anotherThirdResult.atMarks}
-                        onChange={(e) =>
-                          setAnotherThirdResult({
-                            ...anotherThirdResult,
-                            atMarks: e.target.value,
-                          })
-                        }
-                        type="number"
-                        className="w-full border border-gray-300 p-2 rounded"
-                        placeholder="Enter Marks"
-                      />
-                      <h1
-                        className="ml-4 cursor-pointer text-red-700 font-extrabold text-lg"
-                        onClick={deleteItem}
-                      >
-                        x
-                      </h1>
-                    </div>
-                  </div>
-                ))}
-
-                {/* ---------------------------- */}
 
                 {addItems.map((data, index) => (
                   <>

@@ -4,9 +4,9 @@ const ResultCard = ({ post }) => {
   const [arrays, setArrays] = useState(post.anotherGrades);
   const firstletter = (str) => {
     const getfirst = str
-      .split(" ")
-      .map((word) => word.charAt(0))
-      .join(".");
+      ?.split(" ")
+      ?.map((word) => word.charAt(0))
+      ?.join(".");
     return getfirst;
   };
 

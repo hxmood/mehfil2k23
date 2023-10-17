@@ -24,27 +24,6 @@ const resultTypes = new Schema({
         thrMarks: Number
     },
 
-    anotherFirst: {
-        afName: String,
-        afTeam: String,
-        afGrade: String,
-        afMarks: Number
-    },
-
-    anotherSecond: {
-        asName: String,
-        asTeam: String,
-        asGrade: String,
-        asMarks: Number
-    },
-
-    anotherThird: {
-        atName: String,
-        atTeam: String,
-        atGrade: String,
-        atMarks: Number
-    },
-
     anotherGrades :[{
         addName: String,
         addTeam: String,
