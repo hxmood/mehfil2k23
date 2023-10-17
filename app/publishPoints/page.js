@@ -38,9 +38,8 @@ const page = () => {
     fetchRes();
   }, []);
 
-  const sortedTeams = totalPoints
-    ? Object.entries(totalPoints).sort(([, a], [, b]) => b - a)
-    : [];
+  const sortedTeams = totalPoints ? Object.entries(totalPoints).sort(([, a], [, b]) => b - a): [];
+  
   const teamColors = {
     "Legacy Legends": "text-blue-700",
     "Ancient Alliance": "text-green-700",

@@ -3,6 +3,10 @@ import connectMongoDB from "@/utils/database"
 
 import { NextResponse } from "next/server"
 
+export const POST = async () => {
+    await connectMongoDB()
+}
+
 export const GET = async (req) => {    
 
     try {

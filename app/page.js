@@ -2,14 +2,8 @@
 
 import React, { useEffect, useState } from "react";
 import "@/styles/global.css";
-import {
-  Facebook,
-  Instagram,
-  Language,
-  Web,
-  YouTube,
-} from "@mui/icons-material";
-import Link from "next/link";
+import {Facebook, Instagram, Language, YouTube,} from "@mui/icons-material";
+
 const page = () => {
   const [totalPoints, setTotalPoints] = useState(null);
 
