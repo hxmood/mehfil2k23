@@ -20,7 +20,10 @@ export const GET = async(req) => {
             results.forEach((result) => {
                 totalPoints[result.first.team] += result.first.marks,
                 totalPoints[result.second.secTeam] += result.second.secMarks,
-                totalPoints[result.third.thrTeam] += result.third.thrMarks
+                totalPoints[result.third.thrTeam] += result.third.thrMarks,
+                result.anotherGrades.forEach((result) => {
+                    totalPoints[result.addTeam] += result.addMarks
+                })
             })
 
         return NextResponse.json(totalPoints)
