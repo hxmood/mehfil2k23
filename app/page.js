@@ -2,10 +2,18 @@
 
 import React, { useEffect, useState } from "react";
 import "@/styles/global.css";
-import {Facebook, Instagram, Language, YouTube,} from "@mui/icons-material";
+import { Facebook, Instagram, Language, YouTube  } from "@mui/icons-material";
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import ScrollToTop from "react-scroll-to-top";
 
 const page = () => {
   const [totalPoints, setTotalPoints] = useState(null);
+  const scrolltoteam = () => {
+    const element = document.getElementById('teamStats')
+    if(element) {
+      element.scrollIntoView({behavior: "smooth"})
+    }
+  }
 
   useEffect(() => {
     const fetchRes = async () => {
@@ -22,30 +30,25 @@ const page = () => {
 
   const teamColors = {
     "Legacy Legends": "text-blue-700",
-    "Ancient Alliance": "text-green-700",
+    "Ancient Alliance": "text-green-700 ",
     "Traditional Trackers": "text-red-700",
   };
 
   return (
-    <div className="container mx-auto">
-      <div className="px-5 relative text-center w-full justify-start">
-        <h1 className="leading-5">
-          <span className="text-[#2a5ec7] font-extrabold text-6xl">
+    <div className=" text-[#202e55e0] ">
+      <div className="px-5 md:px-10 lg:px-10 xl:px-36 relative text-center w-full h-screen flex flex-col gap-5 items-center justify-center">
+        <h1 className="flex flex-col text-center gap-1 xl:gap-2">
+          <span className="text-[#3333cc] font-extrabold text-5xl lg:text-6xl xl:text-8xl">
             Suffa Mehfil
           </span>
-          <br />
-          <span className="font-bold text-5xl">
+          <span className="font-bold  capitalize text-3xl xl:text-4xl">
             literary festival 10th edition
           </span>
-          <br />
-          <span className="text-lg font-normal italic">
+          <span className="text-lg lg:text-xl pt-2 font-normal italic">
             "the past speaks listen closely"
           </span>
         </h1>
-      </div>
-
-      <section className=" flex flex-col w-full justify-center items-center px-5 my-8 relative">
-        <button className="bg-[#109101] flex px-4 py-3 text-white">
+        <button className="bg-[#109101] rounded-md flex px-4 py-3 text-white">
           <a
             className="flex items-center"
             target="_blank"
@@ -55,31 +58,53 @@ const page = () => {
             <span className="ml-1"> Watch live</span>
           </a>
         </button>
-        <div className="my-8 flex w-full flex-col gap-4">
-          <h1 className="text-center font-bold text-4xl text-blue-800">
-            Team status
+        <div id="teamStats" className="pt-16 ">
+          <button onClick={scrolltoteam}>
+            <KeyboardArrowDownIcon fontSize="large" className="rounded-full p-1 animate-bounce transition-all duration-500 bg-white"/>
+          </button>
+        </div>
+      </div>
+
+      <section   className="px-5 md:px-10 lg:px-10 xl:px-36 flex flex-col w-full justify-center items-center relative">
+        <div className=" flex w-full flex-col gap-4 mt-8">
+          <h1 className="text-center text-[#1d2c55] pb-4 font-bold text-3xl xl:text-4xl ">
+            Team Status
           </h1>
 
-          {sortedTeams.map(([team, points]) => (
-            <div
-              className={`w-full bg-white max-sm:w-full p-4 flex flex-col  items-center justify-center rounded-lg drop-shadow-md ${teamColors[team]}`}
-            >
-              <h1 className="text-3xl font-bold">{points}</h1>
-              <p className="font-medium text-base text-gray-700">{team}</p>
+          {!sortedTeams.length ? (
+            <div className="flex flex-col gap-4
+            ">
+              <div className="w-full h-24 rounded-md  bg-gray-50 animate-pulse"></div>
+              <div className="w-full h-24 rounded-md  bg-gray-50 animate-pulse"></div>
+              <div className="w-full h-24 rounded-md  bg-gray-50 animate-pulse"></div>
             </div>
-          ))}
+          ) : (
+            sortedTeams.map(([team, points]) => (
+              <div
+                className={`w-full backdrop-blur-sm bg-opacity-90 bg-white max-sm:w-full p-4 flex flex-col  items-center justify-center rounded-lg drop-shadow-md shadow-lg ${teamColors[team]}`}
+              >
+                <h1 className="text-3xl text-gray-800 font-bold">{points}</h1>
+                <p className="font-medium text-base ">{team}</p>
+              </div>
+            ))
+          )}
         </div>
 
-        <h1 className="text-justify px-6 text-lg my-6 font-semibold text-gray-800">
-          "Unveiling the Canvas of India's Past: Join us on a journey through
-          the vibrant strokes of history, as we bring to life the artistry that
-          encapsulates India's rich tapestry of historical discriminations.
-          Through the medium of art, we explore the stories, struggles, and
-          resilience of our nation, painting a vivid picture of the past to
-          inspire a brighter future."
-        </h1>
+        <div className="flex flex-col gap-5 py-24 text-center w-full ">
+          <h2 className="font-bold text-[#1d2c55] text-3xl xl:text-4xl">Theme of 23</h2>
+          <h1 className=" text-lg font-medium ">
+            "Unveiling the Canvas of India's Past: Join us on a journey through the vibrant strokes of history, as we bring to life the artistry that encapsulates India's rich tapestry of historical discriminations. Through the medium of art, we explore the stories, struggles, and resilience of our nation, painting a vivid picture of the past to inspire a brighter future."
+          </h1>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pb-16">
+          <img src='/images/Poster1.jpeg'  className="object-cover h-full w-full rounded-md"/>
+          <img src='/images/Poster2.jpeg'  className="object-cover h-full w-full rounded-md"/>
+          <img src='/images/Poster3.jpeg'  className="object-cover h-full w-full rounded-md"/>
+        </div>
       </section>
-      <footer className="w-full sm:max-w-full bg-[#151622] flex flex-col items-center justify-center">
+
+      <footer className="px-5 md:px-10 lg:px-10 xl:px-36 w-full sm:max-w-full bg-[#151622] flex flex-col items-center justify-center">
         <h1 className="text-white mt-8 font-semibold text-sm">Get connected</h1>
         <div className="flex items-center justify-center text-white gap-1">
           <a target="_blank" href="https://www.instagram.com/ahlussuffadars/">
@@ -102,6 +127,7 @@ const page = () => {
           <span>&copy;</span>Suffa Mehfil
         </h1>
       </footer>
+      <ScrollToTop smooth   height='20' width='20' className='flex items-center justify-center z-50'/>
     </div>
   );
 };

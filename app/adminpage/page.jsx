@@ -55,25 +55,25 @@ export const page = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     const requestBody = {
       res: resultItem.item,
       category: resultItem.category,
       first: firstResult,
       second: secondResult,
       third: thirdResult,
-      anotherGrades: addItems
+      anotherGrades: addItems,
     };
-  
+
     try {
-      const res = await fetch('/api/results', {
+      const res = await fetch("/api/results", {
         method: "POST",
         headers: {
-          "content-type": "application/json"
+          "content-type": "application/json",
         },
         body: JSON.stringify(requestBody),
       });
-  
+
       if (res.ok) {
         alert("Results posted successfully");
         setResultItem({
@@ -82,26 +82,25 @@ export const page = () => {
         });
 
         setFirstResult({
-          name: '',
-          team: '',
-          grade: '',
-          marks: ''
+          name: "",
+          team: "",
+          grade: "",
+          marks: "",
         }),
+          setSecondResult({
+            secName: "",
+            secTeam: "",
+            secGrade: "",
+            secMarks: "",
+          });
 
-        setSecondResult({
-          secName: '',
-          secTeam: '',
-          secGrade: '',
-          secMarks: ''
-        })
-  
         setThirdResult({
           thrName: "",
           thrTeam: "",
           thrGrade: "",
           thrMarks: "",
         });
-  
+
         setAddItems([]);
       } else {
         alert("Failed to post results");
@@ -111,38 +110,43 @@ export const page = () => {
       alert("An error occurred while posting results");
     }
   };
-  
-
 
   return (
-    <>
+    <div className="px-3 md:px-10 lg:px-10 xl:px-36 flex flex-col gap-5 items-center py-32">
       <div className="flex gap-4">
         <button
           onClick={() => setSelectedForm("individual")}
-          className={`p-3 ${
-            selectedForm == "individual" ? "bg-blue-600 text-white" : "bg-none"
+          className={`p-3  px-4 rounded-md text-sm md:text-lg font-medium ${
+            selectedForm == "individual"
+              ? "bg-blue-600 text-white"
+              : "bg-blue-50 bg-opacity-70"
           }`}
         >
           Individual
         </button>
         <button
           onClick={() => setSelectedForm("general")}
-          className={`p-3 ${
-            selectedForm == "general" ? "bg-blue-600 text-white" : "bg-none"
+          className={`p-3 px-4   rounded-md text-sm md:text-lg  font-medium ${
+            selectedForm == "general"
+              ? "bg-blue-600 text-white"
+              : "bg-blue-50 bg-opacity-70"
           }`}
         >
           General
         </button>
       </div>
-      <main className="flex flex-col w-full p-5 shadow-xl bg-gray-200 relative mt-4">
+      <main className="flex flex-col w-full  p-5 shadow-xl rounded-md bg-gray-200 relative mt-4">
         {selectedForm == "individual" && (
           <>
-            <h1 className="font-semibold text-red-600 text-center text-xl">
-              Individual results
-            </h1>
-            <div className=" flex flex-1 mt-4 p-6 relative">
-              <form onSubmit={handleSubmit} className="flex flex-1 flex-col">
-                <div className="flex gap-3 items-center mb-6">
+            <div className=" flex flex-col flex-1 gap-4 p-6 relative">
+              <h1 className="font-semibold uppercase text-red-600 text-start text-lg md:text-xl">
+                Individual results
+              </h1>
+              <form
+                onSubmit={handleSubmit}
+                className="flex mt-4 flex-1 flex-col"
+              >
+                <div className="text-lg capitalize flex gap-3 items-center mb-6">
                   <div className="flex-1 flex gap-3 items-center">
                     <label>result:</label>
                     <input
@@ -341,7 +345,7 @@ export const page = () => {
                       placeholder="Enter mark"
                     />
                   </div>
-                </div>            
+                </div>
 
                 {/* ------------------------------------------- */}
 
@@ -430,12 +434,10 @@ export const page = () => {
 
                 {/* -------------------------------------------------------------------- */}
 
-
-
                 {addItems.map((data, index) => (
                   <>
                     <h1 className="pt-3 font-semibold ">Another grades:</h1>
-                    <div className="grid grid-cols-6 pt-6 gap-5">
+                    <div className="grid grid-cols-7 pt-6 gap-5">
                       <div className="col-span-2">
                         <select
                           className="w-full border border-gray-300 p-2 rounded"
@@ -486,7 +488,7 @@ export const page = () => {
                           <option value="-">-</option>
                         </select>
                       </div>
-                      <div className="col-span-1">
+                      <div className="col-span-1 flex items-center">
                         <input
                           name="addMarks"
                           value={data.addMarks}
@@ -495,7 +497,9 @@ export const page = () => {
                           className="w-full border border-gray-300 p-2 rounded"
                           placeholder="Enter Mark"
                         />
+                        <h1 className="cursor-pointer ml-4 font-extrabold text-red-700" onClick={() => {setAddItems([])}}>x</h1>
                       </div>
+                      
                     </div>
                   </>
                 ))}
@@ -509,15 +513,10 @@ export const page = () => {
                     <span className="font-bold text-lg">+</span>Add item
                   </button>
                 </div>
-                <div className="flex justify-between pt-6">
-                  <Link href="/imagesUpload">
-                    <button className="bg-red-800 px-4 py-3 text-white font-semibold w-fit">
-                      Upload Images
-                    </button>
-                  </Link>
+                <div className="flex justify-end pt-6">
                   <button
                     type="submit"
-                    className="px-4 py-3  rounded bg-[#2372fa] font-semibold text-lg text-white"
+                    className="px-4 py-3  rounded-md bg-blue-600 font-semibold text-lg text-white"
                   >
                     Submit
                   </button>
@@ -529,15 +528,15 @@ export const page = () => {
 
         {selectedForm == "general" && (
           <>
-            <h1 className="text-center font-semibold text-xl text-red-600">
-              General group results
-            </h1>
-            <div className=" flex flex-1 mt-4 p-6 relative">
+            <div className=" flex flex-col gap-4  flex-1 p-6 relative">
+              <h1 className="font-semibold uppercase text-red-600 text-start text-lg md:text-xl">
+                General group results
+              </h1>
               <form
                 onSubmit={handleSubmit}
-                className="flex flex-1 flex-col space-y-2"
+                className="flex flex-1 flex-col pt-4 space-y-2"
               >
-                <div className="flex gap-3 items-center mb-6">
+                <div className="capitalize text-lg flex gap-3 items-center mb-6">
                   <div className="flex-1 flex gap-3 items-center">
                     <label>result:</label>
                     <input
@@ -887,8 +886,26 @@ export const page = () => {
             </div>
           </>
         )}
+
+        <div className="py-10 flex wifull justify-between p-6">
+          <Link href="/imagesUpload">
+            <button className="bg-green-900 rounded-lg px-5 py-3 text-white font-semibold w-fit">
+              Upload Images
+            </button>
+          </Link>
+          <Link href="/publishPoints">
+            <button className="bg-green-900 rounded-lg px-5 py-3 text-white font-semibold w-fit">
+              Publish Points
+            </button>
+          </Link>
+          <Link href="/updatePoints">
+            <button className="bg-green-900 rounded-lg px-5 py-3 text-white font-semibold w-fit">
+              Upload Points
+            </button>
+          </Link>
+        </div>
       </main>
-    </>
+    </div>
   );
 };
 

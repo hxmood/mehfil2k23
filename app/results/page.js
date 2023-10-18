@@ -3,10 +3,11 @@
 import ResultCard from "@/components/ResultCard";
 import React from "react";
 import { useState, useEffect } from "react";
+import ScrollToTop from "react-scroll-to-top";
 
 const ResultcardLists = ({ datas }) => {
   return (
-    <div className="flex flex-col-reverse w-full gap-y-3 mb-4 px-5">
+    <div className="flex flex-col-reverse w-full gap-y-3 mb-4 ">
       {datas.map((post) => (
         <ResultCard post={post} />
       ))}
@@ -16,11 +17,20 @@ const ResultcardLists = ({ datas }) => {
 
 const page = () => {
   const [results, setResults] = useState([]);
+  const [button, setButton] = useState(false)
+
+  const Navfix = () => {
+    if (window.scrollY >= 50) {
+      setButton(true);
+    } else {
+      setButton(false);
+    }
+  };
 
   const fetchRes = async () => {
     try {
-      const response = await fetch("/api/results",{
-        cache: 'no-store'
+      const response = await fetch("/api/results", {
+        cache: "no-store",
       });
       const datas = await response.json();
       setResults(datas);
@@ -38,9 +48,9 @@ const page = () => {
     : results;
 
   return (
-    <div className="w-full flex flex-col  items-center justify-center">
-      <div className="flex w-full px-6 justify-between mb-4 items-center">
-        <h1 className="font-extrabold text-2xl text-blue-700">Results</h1>
+    <div className="w-full flex flex-col  px-5 md:px-10 lg:px-10 xl:px-36 pt-32 mb-10">
+      <div className="flex w-full justify-between mb-4 items-center">
+        <h1 className="font-semibold text-2xl text-blue-700">Results</h1>
         <select
           value={category}
           className="border shadow-md rounded-md p-2"
@@ -51,15 +61,18 @@ const page = () => {
           <option value="C zone">C zone</option>
           <option value="Y zone">Y zone</option>
           <option value="H zone">H zone</option>
-          <option value="General">General</option>
+        <option value="General">General</option>na
         </select>
       </div>
 
       {results.length !== 0 ? (
-        <ResultcardLists datas={filteredItems} />
+        <>
+          <ResultcardLists datas={filteredItems} />
+        </>
       ) : (
-        <h1 className="text-md mt-6">Results not published yet</h1>
+        <h1 className="text-md mt-6 text-center">Results not published yet</h1>
       )}
+        <ScrollToTop smooth height='20' width='20' className='flex items-center justify-center z-50 '/>
     </div>
   );
 };

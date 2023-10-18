@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Lobster+Two:wght@700&family=Noto+Sans:ital,wght@1,900&display=swap');
 
 .bg {
   background: #f3f3f3;
@@ -12,7 +12,9 @@
   position: fixed;
 }
 
-
+body{
+  font-family: 'Noto Sans', sans-serif;
+}
 .main {
     width: 100vw;
     min-height: 100vh;
@@ -58,7 +60,7 @@
   }
 
   .app {
-    @apply relative z-10 flex justify-center items-center flex-col max-w-7xl mx-auto sm:px-16;
+    @apply relative z-10 flex justify-center items-center flex-col ;
   }
 
 

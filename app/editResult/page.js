@@ -88,7 +88,7 @@ const page = () => {
   };
 
   return (
-    <main className="flex flex-col w-full p-5 shadow-xl bg-gray-200 relative">
+    <main className="flex px-3 md:px-10 lg:px-10 xl:px-36  pt-32 flex-col w-full p-5 shadow-xl bg-gray-200 relative">
       <div className=" flex flex-1 mt-6 p-6 relative">
         <form
           onSubmit={UpdateResult}

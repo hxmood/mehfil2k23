@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { storage } from "@/utils/firebase";
 import { getDownloadURL, listAll, ref } from "firebase/storage";
 import { Download } from "@mui/icons-material";
+import ScrollToTop from "react-scroll-to-top";
 
 const page = () => {
   const [getImage, setGetImage] = useState([]);
@@ -21,7 +22,7 @@ const page = () => {
   }, []);
 
   return (
-    <div className="flex flex-col">
+    <div className="flex px-5 md:px-10 lg:px-10 xl:px-36 pt-32 flex-col">
       {getImage.length !== 0 ? (
         <>
           <h1 className="text-3xl font-semibold text-center">Posters</h1>
@@ -31,12 +32,18 @@ const page = () => {
               //   onClick={handleClick}
               //   className="card flex items-center justify-centerst  border-3"
               // >
-                <img
-                  className="w-full shadow-md rounded-sm h-auto object-cover"
-                  src={url}
-                />
+              <img
+                className="w-full shadow-md rounded-sm h-auto object-cover"
+                src={url}
+              />
               // </div>
             ))}
+            <ScrollToTop
+              smooth
+              height="20"
+              width="20"
+              className="flex items-center justify-center z-50"
+            />
           </div>
         </>
       ) : (

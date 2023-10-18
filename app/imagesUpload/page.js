@@ -50,7 +50,7 @@ const page = () => {
 
   return (
     <div>
-      <div className="flex flex-col mt-12 items-center justify-center p-12 bg-white rounded-md shadow-md">
+      <div className="flex flex-col px-3 md:px-10 lg:px-10 xl:px-36 pt-32 items-center justify-center p-12 bg-white rounded-md shadow-md">
         <form
           className="mt-4 space-y-6 flex flex-col justify-center items-center"
           onSubmit={handleImageUpload}

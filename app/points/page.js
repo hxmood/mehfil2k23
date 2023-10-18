@@ -1,10 +1,11 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { names } from "@/names/page";
+import ScrollToTop from "react-scroll-to-top";
 
 const page = () => {
   const [points, setPoints] = useState([]);
-  
+
   const fetchRes = async () => {
     try {
       const response = await fetch("/api/participantPoints", {
@@ -39,7 +40,7 @@ const page = () => {
     ?.sort((a, b) => b.points - a.points);
 
   return (
-    <div className="px-5 w-full flex flex-col space-y-4">
+    <div className="px-5 w-full  pt-32 md:px-10 lg:px-10 xl:px-36 flex flex-col space-y-4">
       {points.length !== 0 ? (
         <>
           <div className="flex flex-col">
@@ -53,12 +54,12 @@ const page = () => {
                   >
                     <div className="flex basis-1/2 w-full">
                       <h1 className="mr-2">{index + 1}.</h1>
-                      <h1>{item.name}</h1>
+                      <h1 >{item.name}</h1>
                     </div>
                     <div className="flex basis-1/2 w-full justify-center">
                       <div className="grid w-full grid-cols-2 place-items-end gap-2">
                         <h1>{item.points}</h1>
-                        <h1>{firstletter(item.team)}</h1>
+                        <h1 className="text-gray-600">{firstletter(item.team)}</h1>
                       </div>
                     </div>
                   </div>
@@ -81,7 +82,7 @@ const page = () => {
                     <div className="flex basis-1/2 w-full">
                       <div className="grid grid-cols-2 place-items-end w-full">
                         <h1>{item.points}</h1>
-                        <h1>{firstletter(item.team)}</h1>
+                        <h1 className="text-gray-600">{firstletter(item.team)}</h1>
                       </div>
                     </div>
                   </div>
@@ -100,12 +101,18 @@ const page = () => {
                   <div className="flex basis-1/2 w-full">
                     <div className="grid grid-cols-2 w-full place-items-end">
                       <h1>{item.points}</h1>
-                      <h1>{firstletter(item.team)}</h1>
+                      <h1 className="text-gray-600">{firstletter(item.team)}</h1>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
+            <ScrollToTop
+              smooth
+              height="20"
+              width="20"
+              className="flex items-center justify-center z-50"
+            />
           </div>
         </>
       ) : (

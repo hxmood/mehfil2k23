@@ -47,7 +47,7 @@ const page = () => {
   };
 
   return (
-    <div className="flex flex-col space-y-4 justify-center">
+    <div className="flex flex-col px-3 md:px-10 lg:px-10 xl:px-36 pt-32 space-y-4 justify-center">
       {sortedTeams.map(([team, points]) => (
         <div className="flex text-4xl font-bold mt-12">
           <h1 className="mr-4">{team}:</h1>
