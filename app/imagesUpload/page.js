@@ -18,17 +18,6 @@ const page = () => {
       const imageRef = ref(storage, `posters/${image.name + v4()}`);
       uploadBytes(imageRef, image);
     });
-  
-    // Promise.all(uploadPromises).then((snapshots) => {
-    //   const downloadPromises = snapshots.items.map((item) =>
-    //     getDownloadURL(item)
-    //   );
-  
-    //   Promise.all(downloadPromises).then((urls) => {
-    //     setImageLinks((prev) => [...prev, ...urls]);
-    //     alert('Images uploaded successfully');
-    //   });
-    // });
   };
   console.log(imageLinks);
 

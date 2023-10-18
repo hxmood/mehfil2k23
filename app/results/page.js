@@ -19,13 +19,21 @@ const page = () => {
   const [results, setResults] = useState([]);
   const [button, setButton] = useState(false)
 
+
   const Navfix = () => {
-    if (window.scrollY >= 50) {
-      setButton(true);
-    } else {
-      setButton(false);
-    }
-  };
+    useEffect(() => {
+      const handleScroll = () => {
+        if (window.scrollY >= 50) {
+          setButton(true);
+        } else {
+          setButton(false);
+        }
+      };
+      window.addEventListener('scroll', handleScroll);
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+      };
+    }, []);}
 
   const fetchRes = async () => {
     try {
