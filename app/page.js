@@ -11,7 +11,7 @@ const page = () => {
   const scrolltoteam = () => {
     const element = document.getElementById('teamStats')
     if(element) {
-      element.scrollIntoView({behavior: "smooth"})
+      element.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest",  })
     }
   }
 
@@ -36,7 +36,7 @@ const page = () => {
 
   return (
     <div className=" text-[#202e55e0] ">
-      <div className="px-5 md:px-10 lg:px-10 xl:px-36 relative text-center w-full h-screen flex flex-col gap-5 items-center justify-center">
+      <div className="px-5 md:px-10 lg:px-10 xl:px-36 relative text-center w-full h-screen flex flex-col gap-5 items-center justify-center mt-10">
         <h1 className="flex flex-col text-center gap-1 xl:gap-2">
           <span className="text-[#3333cc] font-extrabold text-5xl lg:text-6xl xl:text-8xl">
             Suffa Mehfil
@@ -58,14 +58,14 @@ const page = () => {
             <span className="ml-1"> Watch live</span>
           </a>
         </button>
-        <div id="teamStats" className="pt-16 ">
+        <div className="pt-16 ">
           <button onClick={scrolltoteam}>
             <KeyboardArrowDownIcon fontSize="large" className="rounded-full p-1 animate-bounce transition-all duration-500 bg-white"/>
           </button>
         </div>
       </div>
 
-      <section   className="px-5 md:px-10 lg:px-10 xl:px-36 flex flex-col w-full justify-center items-center relative">
+      <section id="teamStats" className="px-5 md:px-10 lg:px-10 xl:px-36 flex flex-col w-full justify-center items-center relative">
         <div className=" flex w-full flex-col gap-4 mt-8">
           <h1 className="text-center text-[#1d2c55] pb-4 font-bold text-3xl xl:text-4xl ">
             Team Status
@@ -89,8 +89,9 @@ const page = () => {
             ))
           )}
         </div>
+        </section>
 
-        <div className="flex flex-col gap-5 py-24 text-center w-full ">
+        <div className="flex flex-col gap-5 py-24 mt-4 text-center w-full ">
           <h2 className="font-bold text-[#1d2c55] text-3xl xl:text-4xl">Theme of 23</h2>
           <h1 className=" text-lg font-medium ">
             "Unveiling the Canvas of India's Past: Join us on a journey through the vibrant strokes of history, as we bring to life the artistry that encapsulates India's rich tapestry of historical discriminations. Through the medium of art, we explore the stories, struggles, and resilience of our nation, painting a vivid picture of the past to inspire a brighter future."
@@ -102,7 +103,7 @@ const page = () => {
           <img src='/images/Poster2.jpeg'  className="object-cover h-full w-full rounded-md"/>
           <img src='/images/Poster3.jpeg'  className="object-cover h-full w-full rounded-md"/>
         </div>
-      </section>
+      
 
       <footer className="px-5 md:px-10 lg:px-10 xl:px-36 w-full sm:max-w-full bg-[#151622] flex flex-col items-center justify-center">
         <h1 className="text-white mt-8 font-semibold text-sm">Get connected</h1>

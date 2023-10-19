@@ -15,15 +15,15 @@ const ResultCard = ({ post }) => {
   return (
     <div className="flex flex-col bg-[#fdfdfd] shadow-md rounded-lg p-3 capitalize">
       <div className="flex w-full justify-between">
-        <h1 className="font-normal text-lg">{post.res}</h1>
-        <h2 className="">{post.category}</h2>
+        <h1 className="font-semibold text-lg">{post.res}</h1>
+        <h2>{post.category}</h2>
       </div>
       <hr className="mt-2 " />
 
       {/*--------------------------  */}
 
       <div className="flex flex-col">
-        <div className="flex mt-2 flex-col px-3">
+        <div className="flex mt-1 flex-col px-2">
           <div className="flex gap-2 w-full">
             <div className="flex basis-1/2 items-end">
               <h1 className="mr-4 font-lobster font-normal text-2xl">
@@ -42,7 +42,9 @@ const ResultCard = ({ post }) => {
           </div>
         </div>
 
-        <div className="flex mt-2 flex-col px-3 items-center">
+        {/* ----------------------------------------------- */}
+
+        <div className="flex mt-1 flex-col px-2 items-center">
           <div className="flex gap-2 w-full">
             <div className="flex basis-1/2 items-end">
               <h1 className="mr-2 font-lobster text-2xl font-normal">
@@ -63,7 +65,9 @@ const ResultCard = ({ post }) => {
           </div>
         </div>
 
-        <div className="flex mt-2 flex-col px-3 items-end">
+        {/* ---------------------------------------------------- */}
+
+        <div className="flex mt-1 flex-col px-2 items-end">
           <div className="flex  gap-2 w-full">
             <div className="flex basis-1/2 items-end">
               <h1 className="mr-2 font-lobster font-normal text-2xl">
