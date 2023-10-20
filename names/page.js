@@ -2,7 +2,7 @@
 
 export  const names = {
     'B zone': ['name1', 'name2', 'name3', 'Muhsin', 'Rashid', 'Hamid Muhammed', 'Dildhar', 'Junaid tsy', 'Zainul Abid', 'Razi', 'Safwan kdy', 'Hashir', 'Sayyid Hashbal', 'Sahal Mueen',
-                'Fawas Aralam', 'Noufal Vkd', 'Safwan Tvm', 'Muhammed Iyad', 'Swalih', 'Hisham Banglore', 'Naeem', 'Davood', 'Muhammed Bh', 'Shamveel',
+                'Fawas Aralam', 'Noufal Vkd', 'Safwan Tvm', 'Muhammed Iyad', 'Swalih', 'Hisham Banglore', 'Naeem', 'najeeb', 'Davood', 'Muhammed Bh', 'Shamveel',
                 'Hisham Mlp', 'Sufair', 'Ramees', 'Sayyd Bishrul hafi', 'Mishab', 'Musthafa P', 'Habeeb Paravoor', 'Jaseem', 'Ameen tvm', 'Bishr','Midlaj thathur',
                 'Safwan Malayamma', 'Jaseel', 'Sharbas', 'Mishab pynr'],
 
