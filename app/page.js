@@ -5,9 +5,11 @@ import "@/styles/global.css";
 import { Facebook, Instagram, Language, YouTube  } from "@mui/icons-material";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import ScrollToTop from "react-scroll-to-top";
+import Confetti from "react-confetti";
 
 const page = () => {
   const [totalPoints, setTotalPoints] = useState(null);
+  const [showConfetti, setShowConfetti] = useState(true)
   const scrolltoteam = () => {
     const element = document.getElementById('teamStats')
     if(element) {
@@ -24,6 +26,12 @@ const page = () => {
     fetchRes();
   }, []);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setShowConfetti(false)
+    }, 6000);
+  })
+
   const sortedTeams = totalPoints
     ? Object.entries(totalPoints).sort(([, a], [, b]) => b - a)
     : [];
@@ -36,7 +44,8 @@ const page = () => {
 
   return (
     <div className=" text-[#202e55e0] ">
-      <div className="px-5 md:px-10 lg:px-10 xl:px-36 relative text-center w-full h-screen flex flex-col gap-5 items-center justify-center mt-10">
+      {showConfetti && <Confetti width={window.innerWidth} height={window.innerHeight} recycle={false}/>}
+      <div className="px-5 md:px-10 lg:px-10 xl:px-36 relative text-center w-full h-screen flex flex-col gap-5 items-center justify-center mt-10 animated">
         <h1 className="flex flex-col text-center gap-1 xl:gap-2">
           <span className="text-[#3333cc] font-extrabold text-5xl lg:text-6xl xl:text-8xl">
             Suffa Mehfil
@@ -52,7 +61,7 @@ const page = () => {
           <a
             className="flex items-center"
             target="_blank"
-            href="https://www.youtube.com/@ahlussuffadars"
+            href="https://www.youtube.com/live/vY83w3tmPBM?si=lbBX5tjaiCuypk4c"
           >
             <YouTube />
             <span className="ml-1"> Watch live</span>
