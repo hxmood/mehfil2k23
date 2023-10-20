@@ -15,7 +15,10 @@ const ResultCard = ({ post, index }) => {
   return (
     <div className="flex flex-col bg-[#fdfdfd] shadow-md rounded-lg p-3 capitalize">
       <div className="flex w-full justify-between">
-        <h1 className="font-semibold text-lg">{post.res}</h1>
+        <div className="flex flex-col">
+          <h1 className="hidden lg:inline-block text-gray-400">#{index}</h1>
+          <h1 className="font-semibold text-lg">{post.res}</h1> 
+        </div>
 
         <h2>{post.category}</h2>
       </div>
