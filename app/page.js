@@ -91,14 +91,14 @@ const page = () => {
         </div>
         </section>
 
-        <div className="flex flex-col gap-5 py-24 mt-4 text-center w-full ">
+        <div className="flex flex-col gap-5 py-24 mt-4 text-center w-full px-3 md:px-10 lg:px-10 xl:px-36">
           <h2 className="font-bold text-[#1d2c55] text-3xl xl:text-4xl">Theme of 23</h2>
           <h1 className=" text-lg font-medium ">
             "Unveiling the Canvas of India's Past: Join us on a journey through the vibrant strokes of history, as we bring to life the artistry that encapsulates India's rich tapestry of historical discriminations. Through the medium of art, we explore the stories, struggles, and resilience of our nation, painting a vivid picture of the past to inspire a brighter future."
           </h1>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pb-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pb-16 px-3 md:px-10 lg:px-10 xl:px-36">
           <img src='/images/Poster1.jpeg'  className="object-cover h-full w-full rounded-md"/>
           <img src='/images/Poster2.jpeg'  className="object-cover h-full w-full rounded-md"/>
           <img src='/images/Poster3.jpeg'  className="object-cover h-full w-full rounded-md"/>
