@@ -54,9 +54,9 @@ const Nav = () => {
           <Link href="/results" className="font-medium">
             Results
           </Link>
-          <Link href="/points" className="font-medium">
+          {/* <Link href="/points" className="font-medium">
             Points
-          </Link>
+          </Link> */}
           <Link href="/media" className="font-medium">
             Media
           </Link>
@@ -82,13 +82,13 @@ const Nav = () => {
             >
               Results
             </Link>
-            <Link
+            {/* <Link
               href="/points"
               className="font-medium"
               onClick={() => setDropMenu(!dropMenu)}
             >
               Points
-            </Link>
+            </Link> */}
             <Link
               href="/media"
               className="font-medium"
