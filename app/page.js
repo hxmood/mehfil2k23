@@ -44,7 +44,7 @@ const page = () => {
 
   return (
     <div className=" text-[#202e55e0] ">
-      {showConfetti && <Confetti width={window.innerWidth} height={window.innerHeight} recycle={false}/>}
+      {showConfetti && <Confetti width={1920} height={1080} recycle={false}/>}
       <div className="px-5 md:px-10 lg:px-10 xl:px-36 relative text-center w-full h-screen flex flex-col gap-5 items-center justify-center mt-10 animated">
         <h1 className="flex flex-col text-center gap-1 xl:gap-2">
           <span className="text-[#3333cc] font-extrabold text-5xl lg:text-6xl xl:text-8xl">
