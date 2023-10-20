@@ -8,7 +8,7 @@ export  const names = {
 
 
     'C zone': ['name1', 'name2', 'name3','Muhammad Hameed', 'Sahil', 'Hijaz', 'Rashid Malayamma', 'Shibili', 'Salman Manalipuzha', 'Swabah', 'Habeeb Wayanad', 'Sinan Ap',
-                'Juhan', 'Abdul Hafeez', 'Shaheem', 'Salmanul Faris', 'Favas Mp', 'Muhthasim Billah' ,'Ajeer ','Ziyad', 'Nihal Mlp', 'Zuhair', 'Thasneem',
+                'Juhan', 'Abdul Hafeez', 'Shaheem', 'Salmanul Faris', 'Favas Mp', 'Muhthasim Billah' ,'Ajeer ','Ziyad', 'Nihal Kp', 'Zuhair', 'Thasneem',
                 'Musthafa V', 'Shuhaib Ktdy', 'Farhan', 'Sahad', 'Shuhaib prpngdi', 'Riyas', 'Hafeez P', 'Muhammed Ali', 'Ameen Elad', 'Aslam Kdduvally','Sinan TVM',
                 'Thajudeen', 'Mubashir', 'Aslam Poonur', 'Nihal Kayankulam'],
 

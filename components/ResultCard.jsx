@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const ResultCard = ({ post }) => {
+const ResultCard = ({ post, index }) => {
   const arrays = post.anotherGrades;
   const firstletter = (str) => {
     const getfirst = str
@@ -16,6 +16,7 @@ const ResultCard = ({ post }) => {
     <div className="flex flex-col bg-[#fdfdfd] shadow-md rounded-lg p-3 capitalize">
       <div className="flex w-full justify-between">
         <h1 className="font-semibold text-lg">{post.res}</h1>
+
         <h2>{post.category}</h2>
       </div>
       <hr className="mt-2 " />
