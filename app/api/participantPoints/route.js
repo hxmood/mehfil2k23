@@ -15,7 +15,7 @@ export const GET = async (req) => {
         const students = {}
 
         results.forEach(item => {
-            if(!item.first.name.toLowerCase().includes('& team') && !item.first.name.toLowerCase().includes('and team')) {
+            if(!item.first.name.toLowerCase().includes('& team') && !item.first.name.toLowerCase().includes('and team') && !item.first.name.toLowerCase().includes('and party')) {
 
                 if (!students[item.first.name]) {
                     students[item.first.name] = {points: 0, team: item.first.team}
@@ -23,14 +23,14 @@ export const GET = async (req) => {
                 students[item.first.name].points += item.first.marks
             }
 
-            if(!item.second.secName.toLowerCase().includes('& team') && !item.second.secName.toLowerCase().includes('and team')) {
+            if(!item.second.secName.toLowerCase().includes('& team') && !item.second.secName.toLowerCase().includes('and team') && !item.second.secName.toLowerCase().includes('and party')) {
                 if (!students[item.second.secName]) {
                     students[item.second.secName] = {points: 0, team: item.second.secTeam}
                 }
                 students[item.second.secName].points += item.second.secMarks
             }
 
-            if(!item.third.thrName.toLowerCase().includes('& team') && !item.third.thrName.toLowerCase().includes('and team')) {
+            if(!item.third.thrName.toLowerCase().includes('& team') && !item.third.thrName.toLowerCase().includes('and team') && !item.third.thrName.toLowerCase().includes('and party')) {
                 if (!students[item.third.thrName]) {
                     students[item.third.thrName] = {points: 0, team: item.third.thrTeam}
                 }

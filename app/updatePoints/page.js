@@ -49,7 +49,8 @@ const page = () => {
   return (
     <div className="flex px-3 md:px-10 lg:px-10 xl:px-36 pt-32 flex-col space-y-4 justify-center">
       {sortedTeams.map(([team, points]) => (
-        <div className="flex text-4xl font-bold mt-12">
+        <div className="flex  text-4xl font-bold mt-12">
+          {/* <h1 className="font-semibold text-gray-500">{index}</h1> */}
           <h1 className="mr-4">{team}:</h1>
           <h1 className={`${teamColors[team]}`}>{points}</h1>
         </div>

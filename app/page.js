@@ -54,7 +54,7 @@ const page = () => {
           <a
             className="flex items-center"
             target="_blank"
-            href="https://www.youtube.com/live/vY83w3tmPBM?si=lbBX5tjaiCuypk4c"
+            href="https://www.youtube.com/watch?v=kMN967cQdR0&ab_channel=AhlussuffaDars"
           >
             <YouTube />
             <span className="ml-1"> Watch live</span>
