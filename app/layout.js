@@ -1,5 +1,6 @@
-import Head from 'next/head';
+import "@/styles/global.css";
 import Nav from "@/components/Nav";
+import { Analytics } from "@vercel/analytics/react";
 
 export const metadata = {
   title: "Suffa Mehfil",
@@ -9,19 +10,6 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <Head>
-        <title>{metadata.title}</title>
-        <meta name="description" content={metadata.description} />
-        {/* Add Google Analytics Script */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-CTH7P9Q4EX"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-        
-          gtag('config', 'G-CTH7P9Q4EX');
-        </script>
-      </Head>
       <body>
         <div className="bg main">
           <div className="gradient" />
@@ -29,6 +17,7 @@ export default function RootLayout({ children }) {
         <div className="app">
           <Nav />
           {children}
+          <Analytics />
         </div>
       </body>
     </html>
