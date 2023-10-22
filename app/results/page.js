@@ -8,9 +8,12 @@ import ScrollToTop from "react-scroll-to-top";
 const ResultcardLists = ({ datas }) => {
   return (
     <div className="flex flex-col-reverse w-full gap-y-3 mb-4 ">
-      {datas.map((post, index) => (
-        <ResultCard post={post} index={index + 1}/>
-      ))}
+      {datas.map((post, index) => {
+        return(
+          <ResultCard post={post} index={index + 1}/>
+        )
+        
+    })}
     </div>
   );
 };

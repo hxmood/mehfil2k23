@@ -4,7 +4,14 @@ import pointsModel from "@/models/totalPoints";
 import { NextResponse } from "next/server";
 
 export const GET = async () => {
-  await connectMongoDB()
+  try {
+    await connectMongoDB()
+    const response = await pointsModel.find()
+    return NextResponse.json(response)
+  } catch (error) {
+    return NextResponse({message: "failed to fetch points"})
+  }
+
 }
 
 export const PUT = async (req) => {
@@ -14,7 +21,7 @@ export const PUT = async (req) => {
 
     const result = await pointsModel.findOneAndUpdate(
       { team: team },
-      { $set: { points: points } }
+      { $set: { points: points } },
     );
 
     return NextResponse.json(result);

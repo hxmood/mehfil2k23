@@ -3,7 +3,8 @@ import mongoose, {Schema, model, models} from "mongoose";
 const publishPoints = new Schema({
     
         team: String,
-        points: Number
+        points: Number,
+        after: Number
     
 })
 

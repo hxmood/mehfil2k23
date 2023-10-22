@@ -5,6 +5,7 @@ import { useState } from "react";
 
 const page = () => {
   const [totalPoints, setTotalPoints] = useState(null);
+  const [afterResult, setAfterResult] = useState([])
   const handlePublish = async () => {
     try {
       for (const [team, points] of sortedTeams) {
@@ -13,6 +14,7 @@ const page = () => {
           body: JSON.stringify({
             team,
             points,
+
           }),
         });
       }
@@ -48,6 +50,7 @@ const page = () => {
 
   return (
     <div className="flex flex-col px-3 md:px-10 lg:px-10 xl:px-36 pt-32 space-y-4 justify-center">
+      <h1 className="text-xl text-green-600">After <span>#{afterResult.length}</span></h1>
       {sortedTeams.map(([team, points]) => (
         <div className="flex text-4xl font-bold mt-12">
           <h1 className="mr-4">{team}:</h1>
