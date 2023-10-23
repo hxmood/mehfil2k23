@@ -49,6 +49,14 @@ const page = () => {
           }),
         });
       }
+      const afterUpdate = afterResult.length
+      const response = await fetch("/api/afterPoints", {
+        method: "PUT",
+        body: JSON.stringify({
+          after: after
+        })
+      })
+
       alert("points updated successfully");
     } catch (error) {
       console.log(error);

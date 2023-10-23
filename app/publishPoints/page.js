@@ -6,6 +6,7 @@ import { useState } from "react";
 const page = () => {
   const [totalPoints, setTotalPoints] = useState(null);
   const [afterResult, setAfterResult] = useState([])
+  
   const handlePublish = async () => {
     try {
       for (const [team, points] of sortedTeams) {
@@ -18,6 +19,13 @@ const page = () => {
           }),
         });
       }
+      const after = afterResult.length
+      const publishAfter = await fetch("/api/afterPoints", {
+        method: "POST", 
+        body: JSON.stringify({
+          after: after
+        })
+      })
       alert("Results published successfully!");
     } catch (error) {
       console.error("Error:", error);
@@ -36,8 +44,17 @@ const page = () => {
       console.log(error);
     }
   };
+
+  const afterResults = async () => {
+    const response = await fetch("api/results")
+    const data = await response.json()
+    setAfterResult(data)
+
+  }
+
   useEffect(() => {
     fetchRes();
+    afterResults()
   }, []);
 
   const sortedTeams = totalPoints ? Object.entries(totalPoints).sort(([, a], [, b]) => b - a): [];

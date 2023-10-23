@@ -8,6 +8,7 @@ import ScrollToTop from "react-scroll-to-top";
 
 const page = () => {
   const [totalPoints, setTotalPoints] = useState(null);
+  const [after, setAfter] = useState([])
 
   const scrolltoteam = () => {
     const element = document.getElementById("teamStats");
@@ -19,16 +20,24 @@ const page = () => {
       });
     }
   };
+  const fetchRes = async () => {
+    const response = await fetch("/api/getPoints");
+    const datas = await response.json();
+    setTotalPoints(datas);
+  };
 
+  const afterPoints = async () => {
+    const response = await fetch("/api/afterPoints")
+    const data = await response.json()
+    setAfter(data)
+  }
   useEffect(() => {
-    const fetchRes = async () => {
-      const response = await fetch("/api/getPoints");
-      const datas = await response.json();
-      setTotalPoints(datas);
-    };
     fetchRes();
+    afterPoints()
   }, []);
-  
+
+  console.log(after);
+
   const sortedTeams = totalPoints
     ? Object.entries(totalPoints).sort(([, a], [, b]) => b - a)
     : [];
@@ -57,7 +66,7 @@ const page = () => {
           <a
             className="flex items-center"
             target="_blank"
-            href="https://www.youtube.com/live/n3KUwF4fJCE?si=oGcVYuCnreZ7cH2t"
+            href="https://www.youtube.com/live/tjcnRWSP4Os?si=Jm6TezHKg4dsJlKI"
           >
             <YouTube />
             <span className="ml-1"> Watch live</span>
@@ -73,27 +82,27 @@ const page = () => {
         </div>
       </div>
 
-      <section
-        id="teamStats"
-        className="px-5 md:px-10 lg:px-10 xl:px-36 flex flex-col w-full justify-center items-center relative"
-      >
-        <div className=" flex w-full flex-col gap-4 mt-8">
-          <h1 className="text-center text-[#1d2c55] pb-4 font-bold text-3xl xl:text-4xl ">
+      <section id="teamStats" className="px-5 md:px-10 lg:px-10 xl:px-36 flex flex-col w-full justify-center items-center relative">
+        <div className=" flex w-full flex-col mt-8">
+          <h1 className="text-center text-[#1d2c55] font-bold text-3xl xl:text-4xl ">
             Team Status
           </h1>
+          {after.map(item => (
 
+            <h1 className="text-md text-gray-400 text-center">After <span>#{item.after}</span></h1>
+          ))
+          }
+          </div>
+          <div className="w-full flex flex-col gap-y-4 mt-6">
           {!sortedTeams.length ? (
-            <div
-              className="flex flex-col gap-4
-            "
-            >
+            <div className="flex flex-col gap-4">
               <div className="w-full h-24 rounded-md  bg-gray-50 animate-pulse"></div>
               <div className="w-full h-24 rounded-md  bg-gray-50 animate-pulse"></div>
               <div className="w-full h-24 rounded-md  bg-gray-50 animate-pulse"></div>
             </div>
           ) : (
             <>
-              {sortedTeams.map(([team, points, after]) => (
+              {sortedTeams.map(([team, points]) => (
                 <>
                 <div
                   className={`w-full backdrop-blur-sm bg-opacity-90 bg-white max-sm:w-full p-4 flex flex-col  items-center justify-center rounded-lg drop-shadow-md shadow-lg ${teamColors[team]}`}>
