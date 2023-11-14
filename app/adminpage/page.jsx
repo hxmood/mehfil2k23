@@ -1,6 +1,6 @@
 "use client"
 
-import Adminpage from '@/components/adminpage'
+import Adminpage from '@/components/Adminpage'
 import React from 'react'
 import { Accordion, AccordionItem } from '@nextui-org/react'
 import { signOut } from 'next-auth/react'
