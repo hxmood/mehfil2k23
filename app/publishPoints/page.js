@@ -60,9 +60,9 @@ const page = () => {
   const sortedTeams = totalPoints ? Object.entries(totalPoints).sort(([, a], [, b]) => b - a): [];
   
   const teamColors = {
-    "Legacy Legends": "text-blue-700",
-    "Ancient Alliance": "text-green-700",
-    "Traditional Trackers": "text-red-700",
+    "Team A": "text-blue-700",
+    "Team B": "text-green-700",
+    "Team C": "text-red-700",
   };
 
   return (

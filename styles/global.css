@@ -127,6 +127,10 @@ body{
     transform: translateY(0);
   }
 }
+
+input {
+  @apply w-[440px] py-3 px-4 rounded bg-slate-50 border
+}
   
 
   

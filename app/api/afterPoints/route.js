@@ -29,11 +29,11 @@ export const GET = async (req) => {
 // ---------------------------------------------------------------
 
 export const PUT = async (req) => {
-    const {after} = req.json()
+    const {after} = await req.json()
     try {
         await connectMongoDB()
         const response = await afterPoints.findOneAndUpdate({
-            after: after
+             after
         })
 
         return NextResponse.json(response)

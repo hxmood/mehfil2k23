@@ -50,7 +50,7 @@ const Nav = () => {
       </Link>
 
       <div className="sm:flex hidden justify-end">
-        <div className="flex gap-3 text-lg md:gap-5">
+        <div className="flex gap-3 text-lg md:gap-5 items-center">
           <Link href="/results" className="font-medium">
             Results
           </Link>
@@ -58,7 +58,10 @@ const Nav = () => {
             Points
           </Link> */}
           <Link href="/media" className="font-medium">
-            Media
+            Gallery
+          </Link>
+          <Link href="/register">
+            <button className="p-2 bg-slate-900 rounded text-white">Register</button>
           </Link>
         </div>
       </div>
@@ -95,6 +98,9 @@ const Nav = () => {
               onClick={() => setDropMenu(!dropMenu)}
             >
               Media
+            </Link>
+            <Link href="/register">
+              <button className="p-2 bg-slate-900 text-white rounded">Register</button>
             </Link>
           </div>
         )}

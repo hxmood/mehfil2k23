@@ -1,6 +1,7 @@
 import "@/styles/global.css";
 import Nav from "@/components/Nav";
 import { Analytics } from "@vercel/analytics/react";
+import { AuthProvider } from "./provider";
 
 export const metadata = {
   title: "Suffa Mehfil",
@@ -16,9 +17,12 @@ export default function RootLayout({ children }) {
         </div>
         <div className="app">
           <Nav />
-          {children}
+          <AuthProvider>
+            {children}
+          </AuthProvider>
           <Analytics />
         </div>
+        
       </body>
     </html>
   );

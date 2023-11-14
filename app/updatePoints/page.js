@@ -53,7 +53,7 @@ const page = () => {
       const response = await fetch("/api/afterPoints", {
         method: "PUT",
         body: JSON.stringify({
-          after: after
+          after: afterUpdate
         })
       })
 

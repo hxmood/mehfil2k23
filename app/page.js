@@ -43,9 +43,9 @@ const page = () => {
     : [];
 
   const teamColors = {
-    "Legacy Legends": "text-blue-700",
-    "Ancient Alliance": "text-green-700 ",
-    "Traditional Trackers": "text-red-700",
+    "Team A": "text-blue-700",
+    "Team B": "text-green-700 ",
+    "Team C": "text-red-700",
   };
 
   return (
@@ -66,7 +66,7 @@ const page = () => {
           <a
             className="flex items-center"
             target="_blank"
-            href="https://www.youtube.com/live/tjcnRWSP4Os?si=Jm6TezHKg4dsJlKI"
+            href="https://youtube.com"
           >
             <YouTube />
             <span className="ml-1"> Watch live</span>
@@ -148,24 +148,24 @@ const page = () => {
       <footer className="px-5 md:px-10 lg:px-10 xl:px-36 w-full sm:max-w-full bg-[#151622] flex flex-col items-center justify-center">
         <h1 className="text-white mt-8 font-semibold text-sm">Get connected</h1>
         <div className="flex items-center justify-center text-white gap-1">
-          <a target="_blank" href="https://www.instagram.com/ahlussuffadars/">
+          <a target="_blank" href="https://www.instagram.com/_hxmood.14_/">
             <Instagram fontSize="medium" />
           </a>
           <a
             target="_blank"
-            href="https://www.facebook.com/profile.php?id=100014534434979"
+            href="https://www.facebook.com/muhammad.pattilath"
           >
             <Facebook fontSize="medium" />
           </a>
-          <a target="_blank" href="https://www.ahlussuffadars.in/">
+          <a href="/">
             <Language fontSize="medium" />
           </a>
-          <a target="_blank" href="https://www.youtube.com/@ahlussuffadars">
+          <a href="/">
             <YouTube fontSize="medium" />
           </a>
         </div>
         <h1 className="text-gray-100 mt-4 mb-2">
-          <span>&copy;</span>Suffa Mehfil
+          <span>&copy;</span> Muhammad Hameed - 2023
         </h1>
       </footer>
       <ScrollToTop
